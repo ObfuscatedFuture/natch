@@ -1,5 +1,8 @@
 import React, { useState, useRef } from "react";
 import "./App.css";
+import Sidebar from "./components/Sidebar";
+import DraggableBox from "./components/DraggableBox";
+import DropZoneContainer from "./components/DropZoneContainer";
 
 const NUM_BOXES = 5;
 const NUM_ZONES = 5;
@@ -8,7 +11,6 @@ function App() {
   const [positions, setPositions] = useState(
     Array.from({ length: NUM_BOXES }, () => ({ x: 220, y: 20 }))
   );
-
   const zoneRefs = useRef([]);
 
   const handleDrag = (index, e) => {
@@ -30,7 +32,6 @@ function App() {
         x: rect.left + rect.width / 2,
         y: rect.top + rect.height / 2,
       };
-
       const dx = boxCenter.x - zoneCenter.x;
       const dy = boxCenter.y - zoneCenter.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
@@ -48,48 +49,23 @@ function App() {
     }
 
     if (!snapped) {
-      handleDrag(index, e); // Just update to where they dropped it
+      handleDrag(index, e);
     }
   };
 
   return (
     <div className="screen">
-      <div className="sidebar">
-        <h2>Sidebar</h2>
-        <p>This is the sidebar content.</p>
-      </div>
-
+      <Sidebar />
       <div className="main-area">
-        {/* Drop Zones */}
-        <div className="drop-zone-container">
-          {Array.from({ length: NUM_ZONES }).map((_, i) => (
-            <div
-              key={i}
-              className="drop-zone"
-              ref={(el) => (zoneRefs.current[i] = el)}
-            />
-          ))}
-          </div>
-
-        {/* Draggable Boxes */}
+        <DropZoneContainer count={NUM_ZONES} zoneRefs={zoneRefs} />
         {positions.map((pos, index) => (
-          <div
+          <DraggableBox
             key={index}
-            className="box"
-            style={{ left: pos.x, top: pos.y }}
-            onMouseDown={(e) => {
-              const onMouseMove = (e) => handleDrag(index, e);
-              const onMouseUp = (e) => {
-                handleDrop(index, e);
-                window.removeEventListener("mousemove", onMouseMove);
-                window.removeEventListener("mouseup", onMouseUp);
-              };
-              window.addEventListener("mousemove", onMouseMove);
-              window.addEventListener("mouseup", onMouseUp);
-            }}
-          >
-            Function 1
-          </div>
+            index={index}
+            position={pos}
+            onDrag={handleDrag}
+            onDrop={handleDrop}
+          />
         ))}
       </div>
     </div>
