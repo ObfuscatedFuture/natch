@@ -18,7 +18,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Layers",
-      colour: "#d4f4dd",
+      colour: "#83c5be",
       contents: [
         { kind: "block", type: "layer" }
       ]
@@ -26,7 +26,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Activation Funcs",
-      colour: "#4b1d3f",
+      colour: "#CCE2E9",
       contents: [
         { kind: "block", type: "RELU" },
         { kind: "block", type: "SIGMOID" },
@@ -38,7 +38,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Network",
-      colour: "#2e9cf7",
+      colour: "#006d77",
       contents: [
         { kind: "block", type: "network" },
       ]
@@ -46,7 +46,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Loss Functions",
-      colour: "#d62246",
+      colour: "#CCE2E9",
       contents: [
         { kind: "block", type: "CROSS_ENTROPY" },
         { kind: "block", type: "MEAN_SQUARED_ERROR" },
@@ -59,7 +59,7 @@ const MY_TOOLBOX = {
 
 function App() {
   const blocklyDiv = useRef(null);          // for DOM node
-const blocklyWorkspace = useRef(null);    // for Blockly workspace
+  const blocklyWorkspace = useRef(null);    // for Blockly workspace
   const [code, setCode] = useState("");
   const [showWorkspace, setShowWorkspace] = useState(true);
 
@@ -106,7 +106,7 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
   
 
   const generateCode = (showCode=true) => {
-      // Render conditionally
+    // Render conditionally
     setVisible(showCode)
     javascriptGenerator.forBlock['network'] = function (block, generator) {
       let layers = [];

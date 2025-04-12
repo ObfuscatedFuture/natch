@@ -20,47 +20,48 @@ Blockly.Blocks['layer'] = {
       this.setInputsInline(false); // default, so we preserve vertical layout for others
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(260);
+      this.setColour("#83c5be");
       this.setTooltip("Define Your Layer");
       this.setHelpUrl("");
   }
 };
 
-  Blockly.Blocks['network'] = {
-    init: function () {
-      this.appendDummyInput()
-          .appendField("Network");
-  
-      this.appendStatementInput("LAYERS") // ✅ accept multiple layer blocks
-          .setCheck("Layer")               // optionally restrict to "Layer" type
-          .appendField("Layers");
-  
-      this.appendValueInput("LOSS")
-          .setCheck("LossFunc")
-          .appendField("Loss Func:");
+Blockly.Blocks['network'] = {
+  init: function () {
+    this.appendDummyInput()
+        .appendField("Network");
 
-      this.appendDummyInput()
-          .appendField("Number of Output Nodes:");
-      this.appendDummyInput()
-          .appendField(new Blockly.FieldTextInput("#"), "outputSize");
+    this.appendStatementInput("LAYERS") 
+        .setCheck("Layer")               
+        .appendField("Layers");
+
+    this.appendValueInput("LOSS")
+        .setCheck("LossFunc")
+        .appendField("Loss Func:");
+
+    this.appendDummyInput()
+        .appendField("Number of Output Nodes:");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("#"), "outputSize");
+
+    this.setInputsInline(false);
+    this.setPreviousStatement(null, null);
+    this.setNextStatement(null, null);
+    this.setColour("#006d77");
+    this.setTooltip("Define a network with stacked layers and a loss function");
+    this.setHelpUrl("");
+    
+  }
+};
   
-      this.setInputsInline(false);
-      this.setPreviousStatement(null, null);
-      this.setNextStatement(null, null);
-      this.setColour(207);
-      this.setTooltip("Define a network with stacked layers and a loss function");
-      this.setHelpUrl("");
-      
-    }
-  };
-  
+const color = "#CCE2E9";
 
 Blockly.Blocks['CROSS_ENTROPY'] = {
 init: function () {
     this.appendDummyInput()
         .appendField("Cross Entropy");
     this.setOutput(true, "LossFunc"); 
-    this.setColour(260);
+    this.setColour(color);
     this.setTooltip("Cross Entropy TOOL TIP");
     this.setHelpUrl("");
 }
@@ -71,7 +72,7 @@ Blockly.Blocks['MEAN_SQUARED_ERROR'] = {
         this.appendDummyInput()
             .appendField("Mean Squared Error");
         this.setOutput(true, "LossFunc"); 
-        this.setColour(260);
+        this.setColour(color);
         this.setTooltip("Mean Squared Error TOOL TIP");
         this.setHelpUrl("");
     }
@@ -84,7 +85,7 @@ Blockly.Blocks['L1_LOSS'] = {
         this.appendDummyInput()
             .appendField("L1_Loss");
         this.setOutput(true, "LossFunc"); 
-        this.setColour(260);
+        this.setColour(color);
         this.setTooltip("L1_Loss TOOL TIP");
         this.setHelpUrl("");
     }
@@ -104,7 +105,7 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("RELU");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(260);
+      this.setColour(color);
       this.setTooltip("RELU TOOL TIP");
       this.setHelpUrl("");
     }
@@ -115,7 +116,7 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("SIGMOID");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(260);
+      this.setColour(color);
       this.setTooltip("SIGMOID TOOL TIP");
       this.setHelpUrl("");
     }
@@ -126,7 +127,7 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("TANH");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(260);
+      this.setColour(color);
       this.setTooltip("TANH TOOL TIP");
       this.setHelpUrl("");
     }
@@ -137,7 +138,7 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("SOFTMAX");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(260);
+      this.setColour(color);
       this.setTooltip("SOFTMAX TOOL TIP");
       this.setHelpUrl("");
     }
@@ -148,7 +149,7 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("GELU");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(260);
+      this.setColour(color);
       this.setTooltip("Gelu is better than ReLu");
       this.setHelpUrl("");
     }
