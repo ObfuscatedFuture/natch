@@ -5,8 +5,7 @@ import { javascriptGenerator } from "blockly/javascript"; // ✅ ADD THIS
 import "blockly/blocks";
 import "blockly/msg/en";
 import "./components/CustomBlocks";
-
-
+import Canvas from "./components/Canvas";
 
 const MY_TOOLBOX = {
   kind: "categoryToolbox",
@@ -74,8 +73,13 @@ const MY_TOOLBOX = {
 
 function App() {
   const blocklyDiv = useRef(null);
-  const toolboxRef = useRef(null);
   const [code, setCode] = useState("");
+  const [showWorkspace, setShowWorkspace] = useState(true);
+
+  const toggleWorkspace = () => {
+    setShowWorkspace(prev => !prev);
+  };
+
 
   useEffect(() => {
     if (!blocklyDiv.current) return; // ✅ prevent crash on initial mount
@@ -118,16 +122,23 @@ function App() {
       <button onClick={generateCode}>
           Generate Code
         </button>
+        <button onClick={toggleWorkspace}>
+          {showWorkspace ? "Hide Workspace" : "Show Workspace"}
+        </button>
       </div>
 
       <div className="main-area">
-        <div ref={blocklyDiv} className="blockly-workspace" />
-      
-
         
-
+        <div
+          ref={blocklyDiv}
+          className="blockly-workspace"
+          style={{ display: showWorkspace ? "block" : "none" }}
+          
+        />
+        <Canvas />
         <pre>{code}</pre>
       </div>
+      
     </div>
   );
 }
