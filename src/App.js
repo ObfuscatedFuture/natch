@@ -5,7 +5,7 @@ import { javascriptGenerator, Order } from "blockly/javascript";
 import "blockly/blocks";
 import "blockly/msg/en";
 import "./components/CustomBlocks";
-import Canvas from "./components/Canvas";
+import NeuralNetworkVisualizer from "./components/NeuralNetworkVisualizer";
 import { Layer, ActivationFunction, NeuralNetwork, LossFunction } from "./models";
 import Code from "./Processing";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -173,7 +173,7 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
           style={{ display: showWorkspace ? "block" : "none" }}
           
         />
-        <Canvas num_of_nodes={5} />
+        <NeuralNetworkVisualizer layers={[1,2,3,4,5]}></NeuralNetworkVisualizer>
 
       </div>
       {visible && (
@@ -185,8 +185,6 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
         </div>
 
       )}
-
-      
     </div>
   );
 }

@@ -6,8 +6,8 @@
     overflow: hidden;
   }
   
-  /* Sidebar takes 20% of the width, adjust min/max as needed */
-  .sidebar {
+  
+.sidebar {
     width: 10%;
     min-width: 10%;
     max-width: 25%;
@@ -15,9 +15,23 @@
     height: 100%;
     z-index: 1;
     user-select: none;
-  
-  }
-  
+}
+
+.sidebar button {
+    background-color: #333; /* Dark gray */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar button:hover {
+    background-color: #555; /* Slightly lighter gray */
+}
   /* Main area takes the remaining width */
   .main-area {
     flex: 1;
