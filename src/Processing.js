@@ -1,6 +1,6 @@
 import {LossFunction, ActivationFunction, NeuralNetwork} from "./models"
 
-class Code {
+export default class Code {
     constructor (neuralNetwork) {
         this.network = neuralNetwork;
     }
@@ -18,7 +18,7 @@ class Code {
         const step = ["\tdef forwards(self, x):", "\t\treturn self.model(x)"];
         const code2 = code.concat(step);
         const code3 = code2.concat(this.trainFun());
-        return code3;
+        return code3.join("\n");
     }
 
     layersToCode() {
@@ -37,9 +37,8 @@ class Code {
         }
 
         code.push(`\t\t\tnn.Linear(in_features = ${this.network.layers[this.network.layers.length - 1].numNodes}, out_features = ${this.network.outputSize}\n`);
-        code.push(`\t\t\tnn.${this.networks.layers[i].activationFunction}())`);
 
-        return code;
+        return code.join("\n");
     }
 
     trainFun() {
@@ -48,6 +47,6 @@ class Code {
             "\t\toutputs = model(inputdata)", "\t\terror = loss(outputs,  Y)", "\t\terror.backward()", "\t\toptimizer.step()"
         ];
 
-        return train;
+        return train.join("\n");
     }
 }

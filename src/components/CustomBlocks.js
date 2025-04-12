@@ -15,7 +15,7 @@ Blockly.Blocks['layer'] = {
       this.appendDummyInput()
           .appendField("Number of Input Nodes:");
       this.appendDummyInput()
-          .appendField(new Blockly.FieldTextInput("#"), "NUM_INPUTS");
+          .appendField(new Blockly.FieldTextInput("#"), "numNodes");
   
       this.setInputsInline(false); // default, so we preserve vertical layout for others
       this.setPreviousStatement(true, null);

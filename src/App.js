@@ -6,6 +6,8 @@ import "blockly/blocks";
 import "blockly/msg/en";
 import "./components/CustomBlocks";
 import Canvas from "./components/Canvas";
+import { Layer, ActivationFunction, NeuralNetwork, LossFunction } from "./models";
+import Code from "./Processing";
 
 const MY_TOOLBOX = {
   kind: "categoryToolbox",
@@ -94,13 +96,21 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
 
   const generateCode = () => {
     javascriptGenerator.forBlock['layer'] = function (block, generator) {
-      return "layer"
+      const layer = Layer(block.getFieldValue('numNodes'), ActivationFunction.GELU)
+      const code = new Code(NeuralNetwork(5, 5, [layer], LossFunction.CROSS_ENTROPY));
+      return code.combineAll();
     };
       javascriptGenerator.forBlock['network'] = function () {
         return "network"
       };
       javascriptGenerator.forBlock['CROSS_ENTROPY'] = function () {
           return "CROSS_ENTROPY"
+      }
+      javascriptGenerator.forBlock['MEAN_SQUARED_ERROR'] = function () {
+        return "MEAN_SQUARED_ERROR"
+      }
+      javascriptGenerator.forBlock['L1_LOSS'] = function () {
+        return "L1_LOSS"
       }
         javascriptGenerator['RELU'] = function () {
           return ['"RELU"', javascriptGenerator.ORDER_ATOMIC];
