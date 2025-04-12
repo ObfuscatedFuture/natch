@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import { javascriptGenerator } from "blockly/javascript";
+import { javascriptGenerator, Order } from "blockly/javascript";
 
 Blockly.Blocks['layer'] = {
     init: function () {
@@ -23,11 +23,9 @@ Blockly.Blocks['layer'] = {
       this.setColour(260);
       this.setTooltip("Define Your Layer");
       this.setHelpUrl("");
-    }
-  };
-  javascriptGenerator['layer'] = function () {
-    return ['"layer"', javascriptGenerator.ORDER_ATOMIC];
-  };
+  }
+};
+
   Blockly.Blocks['network'] = {
     init: function () {
       this.appendDummyInput()
@@ -47,12 +45,11 @@ Blockly.Blocks['layer'] = {
       this.setColour(207);
       this.setTooltip("Define a network with stacked layers and a loss function");
       this.setHelpUrl("");
+      
     }
   };
   
-  javascriptGenerator['network'] = function () {
-    return ['"network"', javascriptGenerator.ORDER_ATOMIC];
-  };
+
 Blockly.Blocks['CROSS_ENTROPY'] = {
 init: function () {
     this.appendDummyInput()
@@ -63,9 +60,7 @@ init: function () {
     this.setHelpUrl("");
 }
 };
-javascriptGenerator['CROSS_ENTROPY'] = function () {
-    return ['"CROSS_ENTROPY"', javascriptGenerator.ORDER_ATOMIC];
-  };
+
 Blockly.Blocks['MEAN_SQUARED_ERROR'] = {
     init: function () {
         this.appendDummyInput()
@@ -76,7 +71,7 @@ Blockly.Blocks['MEAN_SQUARED_ERROR'] = {
         this.setHelpUrl("");
     }
 };
-javascriptGenerator['MEAN_SQUARED_ERROR'] = function () {
+javascriptGenerator.forBlock['MEAN_SQUARED_ERROR'] = function () {
     return ['"MEAN_SQUARED_ERROR"', javascriptGenerator.ORDER_ATOMIC];
   };
 Blockly.Blocks['L1_LOSS'] = {
@@ -90,7 +85,7 @@ Blockly.Blocks['L1_LOSS'] = {
     }
 };
 
-javascriptGenerator['L1_LOSS'] = function () {
+javascriptGenerator.forBlock['L1_LOSS'] = function () {
     return ['"L1_LOSS"', javascriptGenerator.ORDER_ATOMIC];
   };
   
@@ -109,9 +104,7 @@ Blockly.Blocks['RELU'] = {
       this.setHelpUrl("");
     }
   };
-  javascriptGenerator['RELU'] = function () {
-    return ['"RELU"', javascriptGenerator.ORDER_ATOMIC];
-  };
+
   Blockly.Blocks['SIGMOID'] = {
     init: function () {
       this.appendDummyInput()
@@ -122,9 +115,7 @@ Blockly.Blocks['RELU'] = {
       this.setHelpUrl("");
     }
   };
-  javascriptGenerator['SIGMOID'] = function () {
-    return ['"SIGMOID"', javascriptGenerator.ORDER_ATOMIC];
-  };
+
   Blockly.Blocks['TANH'] = {
     init: function () {
       this.appendDummyInput()
@@ -135,9 +126,7 @@ Blockly.Blocks['RELU'] = {
       this.setHelpUrl("");
     }
   };
-  javascriptGenerator['TANH'] = function () {
-    return ['"TANH"', javascriptGenerator.ORDER_ATOMIC];
-  };
+
   Blockly.Blocks['SOFTMAX'] = {
     init: function () {
       this.appendDummyInput()
@@ -148,22 +137,18 @@ Blockly.Blocks['RELU'] = {
       this.setHelpUrl("");
     }
   };
-  javascriptGenerator['SOFTMAX'] = function () {
-    return ['"SOFTMAX"', javascriptGenerator.ORDER_ATOMIC];
-  };
+
   Blockly.Blocks['GELU'] = {
     init: function () {
       this.appendDummyInput()
           .appendField("GELU");
       this.setOutput(true, "ActivationFunc"); 
       this.setColour(260);
-      this.setTooltip("GELU TOOL TIP");
+      this.setTooltip("Gelu is better than ReLu");
       this.setHelpUrl("");
     }
   };
-  javascriptGenerator['GELU'] = function () {
-    return ['"GELU"', javascriptGenerator.ORDER_ATOMIC];
-  };
+
   
   /* RELU: Symbol("RELU"),
     SIGMOID: Symbol("SIGMOID"),
