@@ -1,9 +1,13 @@
 import React, { useRef, useEffect } from "react";
+import {LossFunction, ActivationFunction, NeuralNetwork} from "./models"
 import "./Canvas.css";
 
 const Canvas = ({ num_of_nodes }) => {
-  const canvasRef = useRef(null);
-  const animationRef = useRef(null);
+    constructor (neuralNetwork) {
+        this.network = neuralNetwork;
+    }
+    const canvasRef = useRef(null);
+    const animationRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -17,8 +21,8 @@ const Canvas = ({ num_of_nodes }) => {
 
     resizeCanvas();
 
-    const baseRadius = 15;
-    const padding = 10;
+    const baseRadius = 25;
+    const padding = 20;
     const startX = 30;
     const startY = 30;
 
