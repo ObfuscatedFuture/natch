@@ -112,21 +112,21 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
       javascriptGenerator.forBlock['L1_LOSS'] = function () {
         return "L1_LOSS"
       }
-        javascriptGenerator['RELU'] = function () {
-          return ['"RELU"', javascriptGenerator.ORDER_ATOMIC];
-        };
-          javascriptGenerator.forBlock['SIGMOID'] = function () {
-            return ['"SIGMOID"', javascriptGenerator.ORDER_ATOMIC];
-          };
-            javascriptGenerator.forBlock['TANH'] = function () {
-              return ['"TANH"', javascriptGenerator.ORDER_ATOMIC];
-            };
-              javascriptGenerator.forBlock['SOFTMAX'] = function () {
-                return ['"SOFTMAX"', javascriptGenerator.ORDER_ATOMIC];
-              };
-              javascriptGenerator.forBlock['GELU'] = function () {
-                return ['"GELU"', javascriptGenerator.ORDER_ATOMIC];
-              };
+      javascriptGenerator['RELU'] = function () {
+      return ['"RELU"', javascriptGenerator.ORDER_ATOMIC];
+      };
+      javascriptGenerator.forBlock['SIGMOID'] = function () {
+      return ['"SIGMOID"', javascriptGenerator.ORDER_ATOMIC];
+      };
+      javascriptGenerator.forBlock['TANH'] = function () {
+      return ['"TANH"', javascriptGenerator.ORDER_ATOMIC];
+      };
+      javascriptGenerator.forBlock['SOFTMAX'] = function () {
+        return ['"SOFTMAX"', javascriptGenerator.ORDER_ATOMIC];
+      };
+      javascriptGenerator.forBlock['GELU'] = function () {
+        return ['"GELU"', javascriptGenerator.ORDER_ATOMIC];
+      };
 
   javascriptGenerator.forBlock['controls_if'] = function(block, generator) {
     var n = 0;
@@ -142,6 +142,7 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
     if (block.elseCount_) {
       code += ' else {\n' + generator.statementToCode(block, 'ELSE') + '}\n';
     }
+    setCode(code)
     return code;
   };
     const code = javascriptGenerator.workspaceToCode(blocklyWorkspace.current);
