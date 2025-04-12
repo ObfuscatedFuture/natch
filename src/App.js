@@ -175,7 +175,7 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
           style={{ display: showWorkspace ? "block" : "none" }}
           
         />
-        <NeuralNetworkVisualizer layers={[1,2,3,4,5]}></NeuralNetworkVisualizer>
+        <NeuralNetworkVisualizer layers={[4,2,3,4,5]}></NeuralNetworkVisualizer>
 
       </div>
       {visible && (

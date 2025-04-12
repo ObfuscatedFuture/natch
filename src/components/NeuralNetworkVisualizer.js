@@ -24,9 +24,9 @@ export default function NeuralNetworkVisualizer({ layers }) {
       {/* Draw connections */}
       {layers.map((nodeCount, layerIndex) => {
         if (layerIndex === layers.length - 1) return null;
-        return Array.from({ length: nodeCount }).map((_, nodeIndex) => {
+        return Array.from({ length: nodeCount }).flatMap((_, nodeIndex) => {
           const from = getNodePosition(layerIndex, nodeIndex);
-          return layers[layerIndex + 1].map((_, nextNodeIndex) => {
+          return Array.from({ length: layers[layerIndex + 1] }).map((_, nextNodeIndex) => {
             const to = getNodePosition(layerIndex + 1, nextNodeIndex);
             return (
               <line
