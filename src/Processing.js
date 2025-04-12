@@ -37,7 +37,8 @@ export default class Code {
         }
 
         code.push(`\t\t\tnn.Linear(in_features = ${this.network.layers[this.network.layers.length - 1].numNodes}, out_features = ${this.network.outputSize})`);
-        code.push(`\t\t\tnn.${this.network.layers[this.network.layers.length - 1].activationFunction}())`);
+        code.push(`\t\t\tnn.${this.network.layers[this.network.layers.length - 1].activationFunction}()`);
+        code.push("\t\t)");
 
         return code.join("\n");
     }
@@ -45,7 +46,7 @@ export default class Code {
     trainFun() {
         const train = ["def train(model, inputdata, outputdata, numepochs):", "\tfor epoch in range(numepochs):", "\t\tmodel.train()",
             "\t\toptimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)", "\t\toptimizer.zero_grad()", `\t\tloss = nn.${this.network.lossFunction}()`,
-            "\t\toutputs = model(inputdata)", "\t\terror = loss(outputs,  outputdata)", "\t\terror.backward()", "\t\toptimizer.step()"
+            "\t\toutputs = model(inputdata)", "\t\terror = loss(outputs, outputdata)", "\t\terror.backward()", "\t\toptimizer.step()"
         ];
 
         return train.join("\n");
