@@ -32,7 +32,7 @@ const MY_TOOLBOX = {
     },
     {
       kind: "category",
-      name: "Custom",
+      name: "Layers",
       colour: "#AA66CC",
       contents: [
         { kind: "block", type: "layer" }
@@ -46,8 +46,7 @@ const MY_TOOLBOX = {
         { kind: "block", type: "RELU" },
         { kind: "block", type: "SIGMOID" },
         { kind: "block", type: "TANH" },
-        { kind: "block", type: "SOFTMAX" },
-        { kind: "block", type: "LINEAR" }
+        { kind: "block", type: "SOFTMAX" }
       ]
     },
     {
@@ -75,13 +74,12 @@ const MY_TOOLBOX = {
 function App() {
   const blocklyDiv = useRef(null);
   const toolboxRef = useRef(null);
-  const workspaceRef = useRef(null);
   const [code, setCode] = useState("");
 
   useEffect(() => {
     if (!blocklyDiv.current) return; // ✅ prevent crash on initial mount
   
-    workspaceRef.current = Blockly.inject(blocklyDiv.current, {
+    blocklyDiv.current = Blockly.inject(blocklyDiv.current, {
       toolbox: MY_TOOLBOX,
       grid: {
         spacing: 20,
@@ -98,22 +96,17 @@ function App() {
         scaleSpeed: 1.2
       }
     });
-  
-    workspaceRef.current.addChangeListener(() => {
-      const code = javascriptGenerator.workspaceToCode(workspaceRef.current);
-      setCode(code);
-    });
-  
-    return () => {
-      if (workspaceRef.current) {
-        workspaceRef.current.dispose();
-      }
-    };
-  }, []);
+
+  return () => {
+    if (blocklyDiv.current) {
+      blocklyDiv.current.dispose();
+    }
+  };
+}, []);
   
 
   const generateCode = () => {
-    const code = javascriptGenerator.workspaceToCode(workspaceRef.current);
+    const code = javascriptGenerator.workspaceToCode(blocklyDiv.current);
     console.log("Generated JS code:", code);
     setCode(code);
   }

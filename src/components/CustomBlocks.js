@@ -1,4 +1,5 @@
 import * as Blockly from 'blockly/core';
+import { javascriptGenerator } from "blockly/javascript";
 
 Blockly.Blocks['layer'] = {
     init: function () {
@@ -24,6 +25,9 @@ Blockly.Blocks['layer'] = {
       this.setHelpUrl("");
     }
   };
+  javascriptGenerator['layer'] = function () {
+    return ['"layer"', javascriptGenerator.ORDER_ATOMIC];
+  };
   Blockly.Blocks['network'] = {
     init: function () {
       this.appendDummyInput()
@@ -43,6 +47,9 @@ Blockly.Blocks['layer'] = {
       this.setHelpUrl("");
     }
   };
+  javascriptGenerator['network'] = function () {
+    return ['"network"', javascriptGenerator.ORDER_ATOMIC];
+  };
 Blockly.Blocks['CROSS_ENTROPY'] = {
 init: function () {
     this.appendDummyInput()
@@ -53,6 +60,9 @@ init: function () {
     this.setHelpUrl("");
 }
 };
+javascriptGenerator['CROSS_ENTROPY'] = function () {
+    return ['"CROSS_ENTROPY"', javascriptGenerator.ORDER_ATOMIC];
+  };
 Blockly.Blocks['MEAN_SQUARED_ERROR'] = {
     init: function () {
         this.appendDummyInput()
@@ -63,6 +73,9 @@ Blockly.Blocks['MEAN_SQUARED_ERROR'] = {
         this.setHelpUrl("");
     }
 };
+javascriptGenerator['MEAN_SQUARED_ERROR'] = function () {
+    return ['"MEAN_SQUARED_ERROR"', javascriptGenerator.ORDER_ATOMIC];
+  };
 Blockly.Blocks['L1_LOSS'] = {
     init: function () {
         this.appendDummyInput()
@@ -73,6 +86,10 @@ Blockly.Blocks['L1_LOSS'] = {
         this.setHelpUrl("");
     }
 };
+
+javascriptGenerator['L1_LOSS'] = function () {
+    return ['"L1_LOSS"', javascriptGenerator.ORDER_ATOMIC];
+  };
   
 /*
 CROSS_ENTROPY: Symbol("CROSS_ENTROPY"),
@@ -89,6 +106,9 @@ Blockly.Blocks['RELU'] = {
       this.setHelpUrl("");
     }
   };
+  javascriptGenerator['RELU'] = function () {
+    return ['"RELU"', javascriptGenerator.ORDER_ATOMIC];
+  };
   Blockly.Blocks['SIGMOID'] = {
     init: function () {
       this.appendDummyInput()
@@ -98,6 +118,9 @@ Blockly.Blocks['RELU'] = {
       this.setTooltip("SIGMOID TOOL TIP");
       this.setHelpUrl("");
     }
+  };
+  javascriptGenerator['SIGMOID'] = function () {
+    return ['"SIGMOID"', javascriptGenerator.ORDER_ATOMIC];
   };
   Blockly.Blocks['TANH'] = {
     init: function () {
@@ -109,6 +132,9 @@ Blockly.Blocks['RELU'] = {
       this.setHelpUrl("");
     }
   };
+  javascriptGenerator['TANH'] = function () {
+    return ['"TANH"', javascriptGenerator.ORDER_ATOMIC];
+  };
   Blockly.Blocks['SOFTMAX'] = {
     init: function () {
       this.appendDummyInput()
@@ -118,6 +144,9 @@ Blockly.Blocks['RELU'] = {
       this.setTooltip("SOFTMAX TOOL TIP");
       this.setHelpUrl("");
     }
+  };
+  javascriptGenerator['SOFTMAX'] = function () {
+    return ['"SOFTMAX"', javascriptGenerator.ORDER_ATOMIC];
   };
   Blockly.Blocks['GELU'] = {
     init: function () {
@@ -129,6 +158,9 @@ Blockly.Blocks['RELU'] = {
       this.setHelpUrl("");
     }
   };
+  javascriptGenerator['GELU'] = function () {
+    return ['"GELU"', javascriptGenerator.ORDER_ATOMIC];
+  };
   
   /* RELU: Symbol("RELU"),
     SIGMOID: Symbol("SIGMOID"),
@@ -137,3 +169,11 @@ Blockly.Blocks['RELU'] = {
     LINEAR: Symbol("LINEAR"),
     GELU: Symbol("GELU") */
   
+    javascriptGenerator.forBlock = function (name) {
+        if (!this[name]) {
+          console.warn(`⚠️ Missing generator for block: ${name}`);
+          return () => ['undefined', this.ORDER_ATOMIC];
+        }
+        return this[name];
+      };
+      
