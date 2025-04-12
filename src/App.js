@@ -60,6 +60,9 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
   const [code, setCode] = useState("");
   const [showWorkspace, setShowWorkspace] = useState(true);
 
+  const [visible, setVisible] = useState(false);
+  const handleClose = () => setVisible(false);
+
   const toggleWorkspace = () => {
     setShowWorkspace(prev => !prev);
   };
@@ -95,6 +98,8 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
   
 
   const generateCode = () => {
+      // Render conditionally
+    setVisible(prev => !prev)
     javascriptGenerator.forBlock['layer'] = function (block, generator) {
       
     };
@@ -188,7 +193,19 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
         />
         <Canvas num_of_nodes={5} />
         <pre>{code}</pre>
+        
+
       </div>
+      {visible && (
+        <div className="CenteredBox">
+          <button className="CloseButton" onClick={handleClose}>×</button>
+          <div className ="textfield">
+            <pre>{code}</pre>
+          </div>
+          
+        </div>
+      )}
+
       
     </div>
   );
