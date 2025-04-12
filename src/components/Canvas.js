@@ -4,7 +4,7 @@ import "./Canvas.css";
 const Canvas = ({ num_of_nodes }) => {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
-
+//
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
