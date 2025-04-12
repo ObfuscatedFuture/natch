@@ -1,4 +1,4 @@
-import {LossFunction, ActivationFunction, NeuralNetwork} from "models"
+import {LossFunction, ActivationFunction, NeuralNetwork} from "./models"
 
 class Code {
     constructor (NeuralNetwork) {
