@@ -57,7 +57,6 @@ class Layer {
     constructor() {
         this.numNodes = 0;
         this.activationFunction = null;
-        this.output = [];
     }
 
     /**
