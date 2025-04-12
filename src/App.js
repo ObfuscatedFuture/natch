@@ -82,7 +82,7 @@ function App() {
 
 
   useEffect(() => {
-    if (!blocklyDiv.current) return; // ✅ prevent crash on initial mount
+    if (blocklyDiv == null || !blocklyDiv.current) return; // ✅ prevent crash on initial mount
   
     blocklyDiv.current = Blockly.inject(blocklyDiv.current, {
       toolbox: MY_TOOLBOX,
