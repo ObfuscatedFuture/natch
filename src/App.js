@@ -66,6 +66,24 @@ const MY_TOOLBOX = {
         { kind: "block", type: "SOFTMAX" },
         { kind: "block", type: "LINEAR" }
       ]
+    },
+    {
+      kind: "category",
+      name: "Network",
+      colour: "#2e9cf7",
+      contents: [
+        { kind: "block", type: "network" },
+      ]
+    },
+    {
+      kind: "category",
+      name: "Loss Functions",
+      colour: "#AA66CC",
+      contents: [
+        { kind: "block", type: "CROSS_ENTROPY" },
+        { kind: "block", type: "MEAN_SQUARED_ERROR" },
+        { kind: "block", type: "L1_LOSS" }
+      ]
     }
   ],
 };

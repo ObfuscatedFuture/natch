@@ -30,20 +30,55 @@ Blockly.Blocks['layer'] = {
           .appendField("network");
   
       // Inline-style: Label + value input on the same row
-      this.appendValueInput("ACTIVATION")
-          .setCheck("ActivationFunc")
-          .appendField("Activation Func:");
+      this.appendValueInput("LOSS")
+          .setCheck("LossFunc")
+          .appendField("Loss Func:");
+
   
       this.setInputsInline(false); // default, so we preserve vertical layout for others
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour(260);
-      this.setTooltip("Define Your Layer");
+      this.setPreviousStatement(null, null);
+      this.setNextStatement(null, null);
+      this.setColour(207);
+      this.setTooltip("Network ToolTip");
       this.setHelpUrl("");
     }
   };
+Blockly.Blocks['CROSS_ENTROPY'] = {
+init: function () {
+    this.appendDummyInput()
+        .appendField("Cross Entropy");
+    this.setOutput(true, "LossFunc"); 
+    this.setColour(260);
+    this.setTooltip("Cross Entropy TOOL TIP");
+    this.setHelpUrl("");
+}
+};
+Blockly.Blocks['MEAN_SQUARED_ERROR'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Mean Squared Error");
+        this.setOutput(true, "LossFunc"); 
+        this.setColour(260);
+        this.setTooltip("Mean Squared Error TOOL TIP");
+        this.setHelpUrl("");
+    }
+};
+Blockly.Blocks['L1_LOSS'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("L1_Loss");
+        this.setOutput(true, "LossFunc"); 
+        this.setColour(260);
+        this.setTooltip("L1_Loss TOOL TIP");
+        this.setHelpUrl("");
+    }
+};
   
-  
+/*
+CROSS_ENTROPY: Symbol("CROSS_ENTROPY"),
+    MEAN_SQUARED_ERROR: Symbol("MEAN_SQUARED_ERROR"),
+    L1_LOSS: Symbol("L1_LOSS"),
+    */
 Blockly.Blocks['RELU'] = {
     init: function () {
       this.appendDummyInput()
@@ -81,16 +116,6 @@ Blockly.Blocks['RELU'] = {
       this.setOutput(true, "ActivationFunc"); 
       this.setColour(260);
       this.setTooltip("SOFTMAX TOOL TIP");
-      this.setHelpUrl("");
-    }
-  };
-  Blockly.Blocks['LINEAR'] = {
-    init: function () {
-      this.appendDummyInput()
-          .appendField("LINEAR");
-      this.setOutput(true, "ActivationFunc"); 
-      this.setColour(260);
-      this.setTooltip("LINEAR TOOL TIP");
       this.setHelpUrl("");
     }
   };
