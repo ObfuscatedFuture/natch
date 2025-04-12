@@ -11,7 +11,7 @@ export default class Code {
             class MLP(nn.Module)
                 
         */
-        const method = ["import torch.nn as nn", "import torch.optim as optim", "class MLP(nn.Module):", "\tdef __init__(self):", "\t\tsuper(MLP, self).__init__(), \t\tself.model = nn.Sequential()"];
+        const method = ["import torch.nn as nn", "import torch.optim as optim", "class MLP(nn.Module):", "\tdef __init__(self):", "\t\tsuper(MLP, self).__init__()", "\t\tself.model = nn.Sequential("];
         const layers = this.layersToCode();
         const code = method.concat(layers);
 
@@ -36,7 +36,7 @@ export default class Code {
             code.push(activation);
         }
 
-        code.push(`\t\t\tnn.Linear(in_features = ${this.network.layers[this.network.layers.length - 1].numNodes}, out_features = ${this.network.outputSize}\n`);
+        code.push(`\t\t\tnn.Linear(in_features = ${this.network.layers[this.network.layers.length - 1].numNodes}, out_features = ${this.network.outputSize}))`);
 
         return code.join("\n");
     }
