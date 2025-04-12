@@ -1,8 +1,8 @@
 import {LossFunction, ActivationFunction, NeuralNetwork} from "./models"
 
 class Code {
-    constructor (NeuralNetwork) {
-        this.network = NeuralNetwork;
+    constructor (neuralNetwork) {
+        this.network = neuralNetwork;
     }
 
     combineAll() {
