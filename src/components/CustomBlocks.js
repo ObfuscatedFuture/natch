@@ -31,22 +31,25 @@ Blockly.Blocks['layer'] = {
   Blockly.Blocks['network'] = {
     init: function () {
       this.appendDummyInput()
-          .appendField("network");
+          .appendField("Network");
   
-      // Inline-style: Label + value input on the same row
+      this.appendStatementInput("LAYERS") // ✅ accept multiple layer blocks
+          .setCheck("Layer")               // optionally restrict to "Layer" type
+          .appendField("Layers");
+  
       this.appendValueInput("LOSS")
           .setCheck("LossFunc")
           .appendField("Loss Func:");
-
   
-      this.setInputsInline(false); // default, so we preserve vertical layout for others
+      this.setInputsInline(false);
       this.setPreviousStatement(null, null);
       this.setNextStatement(null, null);
       this.setColour(207);
-      this.setTooltip("Network ToolTip");
+      this.setTooltip("Define a network with stacked layers and a loss function");
       this.setHelpUrl("");
     }
   };
+  
   javascriptGenerator['network'] = function () {
     return ['"network"', javascriptGenerator.ORDER_ATOMIC];
   };
