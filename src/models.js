@@ -5,12 +5,11 @@ export const LossFunction = Object.freeze({
 })
 
 export const ActivationFunction = Object.freeze({
-    RELU: Symbol("RELU"),
-    SIGMOID: Symbol("SIGMOID"),
-    TANH: Symbol("TANH"),
-    SOFTMAX: Symbol("SOFTMAX"),
-    LINEAR: Symbol("LINEAR"),
-    GELU: Symbol("GELU")
+    RELU: Symbol("ReLu"),
+    SIGMOID: Symbol("Sigmoid"),
+    TANH: Symbol("Tanh"),
+    SOFTMAX: Symbol("Softmax"),
+    GELU: Symbol("Gelu")
 })
 
 /**
