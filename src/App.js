@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { act, useEffect, useRef, useState } from "react";
 import "./App.css";
 import * as Blockly from "blockly";
 import { javascriptGenerator, Order } from "blockly/javascript"; 
@@ -102,18 +102,21 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
         let layers = [];
         let layerBlock = block.getInputTargetBlock("LAYERS");
         while (layerBlock) {
-          layers.push(Layer(block.getFieldValue('numNodes'), ActivationFunction.GELU))
+          layers.push(Layer(parseInt(layerBlock.getFieldValue('numNodes')), layerBlock.getFieldValue('ACTIVATION')));
+          const activationFunction = layerBlock.getInputTargetBlock('ACTIVATION').type
+          console.log("activationFunction", ActivationFunction[activationFunction])
+          
+          console.log("numNodes", layerBlock.getFieldValue('numNodes'))
           layerBlock = layerBlock.getNextBlock(); // iterate through stacked Layer blocks
         }
 
         // Get the loss function from the "LOSS" input (value input)
-        const lossBlock = block.getInputTargetBlock("LOSS");
-        let lossCode = lossBlock ? generator.blockToCode(lossBlock) : null;
+        const lossBlock = LossFunction[block.getInputTargetBlock("LOSS").type]
 
         // You now have layersCode = [layer1Code, layer2Code, ...]
         // and lossCode = "LossFunction.XYZ" or whatever the loss block generates
 
-       const generatedCode = new Code(NeuralNetwork(5, 5, layers, lossCode));
+       const generatedCode = new Code(NeuralNetwork(5, 5, layers, lossBlock));
         setCode(generatedCode.combineAll());
         return generatedCode.combineAll();
       };
