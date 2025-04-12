@@ -6,11 +6,18 @@ class Code {
     }
 
     combineAll() {
+        /*
+            import torch
+            class MLP(nn.Module)
+                
+        */
         const method = ["import torch.nn as nn", "class MLP(nn.Module):", "\tdef __init__(self):", "\t\tsuper(MLP, self).__init__(), \t\tself.model = nn.Sequential("];
         const layers = this.layersToCode();
         const code = method.concat(layers);
 
-        return code;
+        const step = ["\tdef forwards(self, x):", "\t\treturn self.model(x)"];
+        const code2 = code.concat(step);
+        return code2;
     }
 
     layersToCode() {
