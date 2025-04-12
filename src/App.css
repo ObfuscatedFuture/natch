@@ -58,15 +58,7 @@
     cursor: pointer;
     color: white;
   }
-  .CloseButton :hover {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    background: none;
-    border: none;
-    font-size: 2.3rem;
-    color: rgb(255, 137, 137);
-  }
+
   .textfield {
     overflow-y: auto;
     padding-bottom: 0.5rem;
