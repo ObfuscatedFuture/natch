@@ -1,7 +1,7 @@
 export const LossFunction = Object.freeze({
-    CROSS_ENTROPY: Symbol("CROSS_ENTROPY"),
-    MEAN_SQUARED_ERROR: Symbol("MEAN_SQUARED_ERROR"),
-    L1_LOSS: Symbol("L1_LOSS"),
+    CROSS_ENTROPY: Symbol("CrossEntropyLoss"),
+    MEAN_SQUARED_ERROR: Symbol("MSELoss"),
+    L1_LOSS: Symbol("L1Loss"),
 })
 
 export const ActivationFunction = Object.freeze({
