@@ -66,6 +66,8 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
   const [visible, setVisible] = useState(false);
   const handleClose = () => setVisible(false);
 
+  const [neuralNetwork, setNeuralNetwork] = useState(null)
+
   const toggleWorkspace = () => {
     setShowWorkspace(prev => !prev);
   };
@@ -103,74 +105,51 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
   const generateCode = () => {
       // Render conditionally
     setVisible(prev => !prev)
-    javascriptGenerator.forBlock['layer'] = function (block, generator) {
-      
-    };
-      javascriptGenerator.forBlock['network'] = function (block, generator) {
-        let layers = [];
-        let layerBlock = block.getInputTargetBlock("LAYERS");
-        while (layerBlock) {
-          const activationFunction = ActivationFunction[layerBlock.getInputTargetBlock('ACTIVATION').type]
-          layers.push(Layer(parseInt(layerBlock.getFieldValue('numNodes')), activationFunction));
-          layerBlock = layerBlock.getNextBlock(); // iterate through stacked Layer blocks
+
+    javascriptGenerator.forBlock['network'] = function (block, generator) {
+      let layers = [];
+      let layerBlock = block.getInputTargetBlock("LAYERS");
+      if (layerBlock === null) {
+        alert("No layer block connected");
+        return "ERROR"
+      }
+      // Iterate through all connected Layer blocks and add them to the layers array
+      while (layerBlock) {
+        if ( layerBlock.getInputTargetBlock('ACTIVATION') === null) {
+          alert("No activation function block connected")
+          return "ERROR"
         }
-
-        // Get the loss function from the "LOSS" input (value input)
-        const lossBlock = LossFunction[block.getInputTargetBlock("LOSS").type]
-        const outputSize = block.getFieldValue('outputSize')
-
-        // You now have layersCode = [layer1Code, layer2Code, ...]
-        // and lossCode = "LossFunction.XYZ" or whatever the loss block generates
-
-       const generatedCode = new Code(NeuralNetwork(outputSize, layers, lossBlock));
-        setCode(generatedCode.combineAll());
-        return generatedCode.combineAll();
-      };
-     
-
-    javascriptGenerator.forBlock['controls_if'] = function(block, generator) {
-      var n = 0;
-      var code = '';
-      if (generator.valueToCode(block, 'IF' + n, Order.NONE)) {
-        code += 'if (' + generator.valueToCode(block, 'IF' + n, Order.NONE) + ') {\n' + generator.statementToCode(block, 'DO' + n) + '}\n';
+        const activationFunction = ActivationFunction[ layerBlock.getInputTargetBlock('ACTIVATION').type]
+        
+        layers.push(Layer(parseInt(layerBlock.getFieldValue('numNodes')), activationFunction));
+        layerBlock = layerBlock.getNextBlock(); // iterate through stacked Layer blocks
       }
-      for (n = 1; n <= block.elseifCount_; n++) {
-        if (generator.valueToCode(block, 'IF' + n, Order.NONE)) {
-          code += ' else if (' + generator.valueToCode(block, 'IF' + n, Order.NONE) + ') {\n' + generator.statementToCode(block, 'DO' + n) + '}\n';
-        }
+
+      // Get the loss function from the "LOSS" input (value input)
+      if (block.getInputTargetBlock("LOSS") === null) {
+        alert("No loss function block connected");  
+        return "ERROR" 
       }
-      if (block.elseCount_) {
-        code += ' else {\n' + generator.statementToCode(block, 'ELSE') + '}\n';
+      const lossBlock = LossFunction[block.getInputTargetBlock("LOSS").type]
+      if (block.getFieldValue('outputSize') === null) {
+        alert("No output size provided")
+        return "ERROR"
       }
-      return code;
+      const outputSize = block.getFieldValue('outputSize')
+
+      // You now have layersCode = [layer1Code, layer2Code, ...]
+      // and lossCode = "LossFunction.XYZ" or whatever the loss block generates
+
+      const generatedCode = new Code(NeuralNetwork(outputSize, layers, lossBlock));
+      return generatedCode.combineAll();
     };
-
-    javascriptGenerator.forBlock['CROSS_ENTROPY'] = function () {
-      return "CROSS_ENTROPY"
-  }
-  javascriptGenerator.forBlock['MEAN_SQUARED_ERROR'] = function () {
-    return "MEAN_SQUARED_ERROR"
-  }
-  javascriptGenerator.forBlock['L1_LOSS'] = function () {
-    return "L1_LOSS"
-  }
-  javascriptGenerator['RELU'] = function () {
-  return ['"RELU"', javascriptGenerator.ORDER_ATOMIC];
-  };
-  javascriptGenerator.forBlock['SIGMOID'] = function () {
-  return ['"SIGMOID"', javascriptGenerator.ORDER_ATOMIC];
-  };
-  javascriptGenerator.forBlock['TANH'] = function () {
-  return ['"TANH"', javascriptGenerator.ORDER_ATOMIC];
-  };
-  javascriptGenerator.forBlock['SOFTMAX'] = function () {
-    return ['"SOFTMAX"', javascriptGenerator.ORDER_ATOMIC];
-  };
-  javascriptGenerator.forBlock['GELU'] = function () {
-    return ['"GELU"', javascriptGenerator.ORDER_ATOMIC];
-  };
 
     const generatedCode = javascriptGenerator.workspaceToCode(blocklyWorkspace.current);
+    if (generatedCode === "ERROR") {
+      setVisible(false)
+      return
+    }
+
     console.log("Generated JS code:", generatedCode);
     setCode(generatedCode);
   }
