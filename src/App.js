@@ -160,7 +160,7 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
 
   return (
     <div className="screen">
-      <div className="sidebar">Sidebar Here
+      <div className="footer">
       <button onClick={generateCode}>
           Generate Code
         </button>
