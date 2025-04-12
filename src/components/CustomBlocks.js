@@ -38,6 +38,11 @@ Blockly.Blocks['layer'] = {
       this.appendValueInput("LOSS")
           .setCheck("LossFunc")
           .appendField("Loss Func:");
+
+      this.appendDummyInput()
+          .appendField("Number of Output Nodes:");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldTextInput("#"), "outputSize");
   
       this.setInputsInline(false);
       this.setPreviousStatement(null, null);

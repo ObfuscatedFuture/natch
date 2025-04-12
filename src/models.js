@@ -13,14 +13,14 @@ export const ActivationFunction = Object.freeze({
 })
 
 /**
- * 
- * @param {number} inputSize 
+ *  
  * @param {number} outputSize 
  * @param {Layer[]} layers 
  * @param {string} lossFunction 
+ * @return {object}
  */
-export function NeuralNetwork(inputSize, outputSize, layers, lossFunction) {
-    return { inputSize, outputSize, layers, lossFunction }
+export function NeuralNetwork(outputSize, layers, lossFunction) {
+    return { inputSize: layers[0].inputSize, outputSize, layers, lossFunction }
 }
 
 /**

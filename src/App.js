@@ -109,11 +109,12 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
 
         // Get the loss function from the "LOSS" input (value input)
         const lossBlock = LossFunction[block.getInputTargetBlock("LOSS").type]
+        const outputSize = block.getFieldValue('outputSize')
 
         // You now have layersCode = [layer1Code, layer2Code, ...]
         // and lossCode = "LossFunction.XYZ" or whatever the loss block generates
 
-       const generatedCode = new Code(NeuralNetwork(5, 5, layers, lossBlock));
+       const generatedCode = new Code(NeuralNetwork(outputSize, layers, lossBlock));
         setCode(generatedCode.combineAll());
         return generatedCode.combineAll();
       };
