@@ -43,8 +43,8 @@ class NeuralNetwork {
      * @param {ActivationFunction} activationFunction 
      * 
      */
-    addLayer(numNodes, activationFunction) {
-        this.layers.push(Layer(numNodes, activationFunction));
+    addLayer() {
+        this.layers.push(Layer());
     }
 
     isValid() {
