@@ -96,19 +96,13 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
 
   const generateCode = () => {
     javascriptGenerator.forBlock['layer'] = function (block, generator) {
-      const layer = Layer(block.getFieldValue('numNodes'), ActivationFunction.GELU)
-      return layer
+      
     };
       javascriptGenerator.forBlock['network'] = function (block, generator) {
-        let layersCode = [];
+        let layers = [];
         let layerBlock = block.getInputTargetBlock("LAYERS");
         while (layerBlock) {
-          const code = generator.blockToCode(layerBlock);
-          if (Array.isArray(code)) {
-            layersCode.push(code[0]);
-          } else {
-            layersCode.push(code);
-          }
+          layers.push(Layer(block.getFieldValue('numNodes'), ActivationFunction.GELU))
           layerBlock = layerBlock.getNextBlock(); // iterate through stacked Layer blocks
         }
 
@@ -119,7 +113,7 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
         // You now have layersCode = [layer1Code, layer2Code, ...]
         // and lossCode = "LossFunction.XYZ" or whatever the loss block generates
 
-       const generatedCode = new Code(NeuralNetwork(5, 5, layersCode, lossCode));
+       const generatedCode = new Code(NeuralNetwork(5, 5, layers, lossCode));
         setCode(generatedCode.combineAll());
         return generatedCode.combineAll();
       };
