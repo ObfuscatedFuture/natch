@@ -4,6 +4,8 @@ import Sidebar from "./components/Sidebar";
 import DraggableBox from "./components/DraggableBox";
 import DropZoneContainer from "./components/DropZoneContainer";
 import CBox from "./components/CBox";
+import GridContainer from "./components/GridContainer";
+import BlocklyEditor from "./components/BlocklyEditor"
 
 const NUM_ZONES = 5;
 
@@ -13,6 +15,7 @@ function App() {
   const [newBoxToDragId, setNewBoxToDragId] = useState(null);
   const boxIdRef = useRef(0);
   const [cBoxes, setCBoxes] = useState([]);
+  const [gridContainers, setGridContainers] = useState([]);
   
 
   const handleAddBox = (label, mouseEvent) => {
@@ -42,6 +45,20 @@ function App() {
   
     setNewBoxToDragId(newId);
   };
+
+  const handleAddGridContainer = (label, mouseEvent) => {
+    const newId = boxIdRef.current++;
+    const newGridContainer = {
+      id: newId,
+      label: label,
+      x: mouseEvent.clientX - 200,
+      y: mouseEvent.clientY - 200,
+      children: [], // boxes inside the grid container
+    };
+    
+    setGridContainers(prev => [...prev, newGridContainer]);
+    setNewBoxToDragId(newId);
+  };
   
   
 
@@ -67,6 +84,19 @@ function App() {
           cbox.id === id
             ? { ...cbox, x: e.clientX - 150, y: e.clientY - 150 }
             : cbox
+        )
+      );
+      return;
+    }
+    
+    // Try dragging a GridContainer
+    const updatedGridContainer = gridContainers.find((container) => container.id === id);
+    if (updatedGridContainer) {
+      setGridContainers((prev) =>
+        prev.map((container) =>
+          container.id === id
+            ? { ...container, x: e.clientX - 200, y: e.clientY - 200 }
+            : container
         )
       );
     }
@@ -111,52 +141,10 @@ function App() {
 
   return (
     <div className="screen">
-      <Sidebar onAddBox={handleAddBox} onAddCBox={handleAddCBox} />
+      <Sidebar />
 
       <div className="main-area">
-        <DropZoneContainer count={NUM_ZONES} zoneRefs={zoneRefs} />
-        {boxes.map((box) => (
-        <DraggableBox
-          key={box.id}
-          id={box.id}
-          label={box.label}
-          position={{ x: box.x, y: box.y }}
-          onDrag={handleDrag}
-          onDrop={handleDrop}
-          autoDrag={newBoxToDragId === box.id}
-          clearAutoDrag={() => setNewBoxToDragId(null)}
-        />
-      ))}
-      {cBoxes.map((cbox) => (
-      <CBox
-        key={cbox.id}
-        id={cbox.id}
-        label={cbox.label}
-        position={{ x: cbox.x, y: cbox.y }}
-        childrenBoxes={cbox.children}
-        onDrag={handleDrag}
-        onDrop={handleDrop}
-        onDropInside={(childBox) => {
-          setCBoxes((prev) =>
-            prev.map((cb) =>
-              cb.id === cbox.id
-                ? {
-                    ...cb,
-                    children: cb.children.some((b) => b.id === childBox.id)
-                      ? cb.children.map((b) =>
-                          b.id === childBox.id ? childBox : b
-                        )
-                      : [...cb.children, childBox],
-                  }
-                : cb
-            )
-          );
-        }}
-        autoDrag={newBoxToDragId === cbox.id}
-        clearAutoDrag={() => setNewBoxToDragId(null)}
-      />
-    ))}
-
+      <BlocklyEditor />
 
       </div>
     </div>
