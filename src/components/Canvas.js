@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import {LossFunction, ActivationFunction, NeuralNetwork} from "./models"
+import {LossFunction, ActivationFunction, NeuralNetwork} from "../models"
 import "./Canvas.css";
 
 const Canvas = ({ num_of_nodes }) => {

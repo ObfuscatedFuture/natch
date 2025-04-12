@@ -128,26 +128,26 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
         return ['"GELU"', javascriptGenerator.ORDER_ATOMIC];
       };
 
-  javascriptGenerator.forBlock['controls_if'] = function(block, generator) {
-    var n = 0;
-    var code = '';
-    if (generator.valueToCode(block, 'IF' + n, Order.NONE)) {
-      code += 'if (' + generator.valueToCode(block, 'IF' + n, Order.NONE) + ') {\n' + generator.statementToCode(block, 'DO' + n) + '}\n';
-    }
-    for (n = 1; n <= block.elseifCount_; n++) {
+    javascriptGenerator.forBlock['controls_if'] = function(block, generator) {
+      var n = 0;
+      var code = '';
       if (generator.valueToCode(block, 'IF' + n, Order.NONE)) {
-        code += ' else if (' + generator.valueToCode(block, 'IF' + n, Order.NONE) + ') {\n' + generator.statementToCode(block, 'DO' + n) + '}\n';
+        code += 'if (' + generator.valueToCode(block, 'IF' + n, Order.NONE) + ') {\n' + generator.statementToCode(block, 'DO' + n) + '}\n';
       }
-    }
-    if (block.elseCount_) {
-      code += ' else {\n' + generator.statementToCode(block, 'ELSE') + '}\n';
-    }
-    setCode(code)
-    return code;
-  };
-    const code = javascriptGenerator.workspaceToCode(blocklyWorkspace.current);
-    console.log("Generated JS code:", code);
-    setCode(code);
+      for (n = 1; n <= block.elseifCount_; n++) {
+        if (generator.valueToCode(block, 'IF' + n, Order.NONE)) {
+          code += ' else if (' + generator.valueToCode(block, 'IF' + n, Order.NONE) + ') {\n' + generator.statementToCode(block, 'DO' + n) + '}\n';
+        }
+      }
+      if (block.elseCount_) {
+        code += ' else {\n' + generator.statementToCode(block, 'ELSE') + '}\n';
+      }
+      return code;
+    };
+
+    const generatedCode = javascriptGenerator.workspaceToCode(blocklyWorkspace.current);
+    console.log("Generated JS code:", generatedCode);
+    setCode(generatedCode);
   }
 
   return (
