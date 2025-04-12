@@ -52,7 +52,7 @@ const MY_TOOLBOX = {
       name: "Custom",
       colour: "#AA66CC",
       contents: [
-        { kind: "block", type: "layers" }
+        { kind: "block", type: "layer" }
       ]
     },
   ],
@@ -89,6 +89,7 @@ function App() {
           }}
           style={{ height: "600px", width: "100%" }}
         />
+        <button onclick="ADD EVENT LISTENER HERE()"> ADD EVENT LISTENER() </button>
       </div>
     </div>
   );
