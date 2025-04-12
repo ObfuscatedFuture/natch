@@ -100,33 +100,34 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
       const code = new Code(NeuralNetwork(5, 5, [layer], LossFunction.CROSS_ENTROPY));
       return code.combineAll();
     };
-      javascriptGenerator.forBlock['network'] = function () {
-        return "network"
+      javascriptGenerator.forBlock['network'] = function (block, generator) {
+        let layersCode = [];
+        let layerBlock = block.getInputTargetBlock("LAYERS");
+        while (layerBlock) {
+          const code = generator.blockToCode(layerBlock);
+          if (Array.isArray(code)) {
+            layersCode.push(code[0]);
+          } else {
+            layersCode.push(code);
+          }
+          layerBlock = layerBlock.getNextBlock(); // iterate through stacked Layer blocks
+        }
+
+        // Get the loss function from the "LOSS" input (value input)
+        const lossBlock = block.getInputTargetBlock("LOSS");
+        let lossCode = lossBlock ? generator.blockToCode(lossBlock) : null;
+
+        // You now have layersCode = [layer1Code, layer2Code, ...]
+        // and lossCode = "LossFunction.XYZ" or whatever the loss block generates
+
+        const code = `
+          const layers = [${layersCode.join(', ')}];
+          const loss = ${lossCode};
+          const net = new NeuralNetwork(5, 5, layers, loss);
+        `;
+        return code;
       };
-      javascriptGenerator.forBlock['CROSS_ENTROPY'] = function () {
-          return "CROSS_ENTROPY"
-      }
-      javascriptGenerator.forBlock['MEAN_SQUARED_ERROR'] = function () {
-        return "MEAN_SQUARED_ERROR"
-      }
-      javascriptGenerator.forBlock['L1_LOSS'] = function () {
-        return "L1_LOSS"
-      }
-      javascriptGenerator['RELU'] = function () {
-      return ['"RELU"', javascriptGenerator.ORDER_ATOMIC];
-      };
-      javascriptGenerator.forBlock['SIGMOID'] = function () {
-      return ['"SIGMOID"', javascriptGenerator.ORDER_ATOMIC];
-      };
-      javascriptGenerator.forBlock['TANH'] = function () {
-      return ['"TANH"', javascriptGenerator.ORDER_ATOMIC];
-      };
-      javascriptGenerator.forBlock['SOFTMAX'] = function () {
-        return ['"SOFTMAX"', javascriptGenerator.ORDER_ATOMIC];
-      };
-      javascriptGenerator.forBlock['GELU'] = function () {
-        return ['"GELU"', javascriptGenerator.ORDER_ATOMIC];
-      };
+     
 
     javascriptGenerator.forBlock['controls_if'] = function(block, generator) {
       var n = 0;
