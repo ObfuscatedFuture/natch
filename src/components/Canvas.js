@@ -1,38 +1,75 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from "react";
+import "./Canvas.css";
 
-const Canvas = props => {
-  
-  const canvasRef = useRef(null)
-  
-  const draw = (ctx, frameCount) => {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-    ctx.fillStyle = '#000000'
-    ctx.beginPath()
-    ctx.arc(50, 100, 20*Math.sin(frameCount*0.05)**2, 0, 2*Math.PI)
-    ctx.fill()
-  }
-  
+const Canvas = ({ num_of_nodes }) => {
+  const canvasRef = useRef(null);
+  const animationRef = useRef(null);
+
   useEffect(() => {
-    
-    const canvas = canvasRef.current
-    const context = canvas.getContext('2d')
-    let frameCount = 0
-    let animationFrameId
-    
-    //Our draw came here
-    const render = () => {
-      frameCount++
-      draw(context, frameCount)
-      animationFrameId = window.requestAnimationFrame(render)
-    }
-    render()
-    
-    return () => {
-      window.cancelAnimationFrame(animationFrameId)
-    }
-  }, [draw])
-  
-  return <canvas ref={canvasRef} {...props}/>
-}
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
 
-export default Canvas
+    const resizeCanvas = () => {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+    };
+
+    resizeCanvas();
+
+    const baseRadius = 15;
+    const padding = 10;
+    const startX = 30;
+    const startY = 30;
+
+    let visibleNodes = num_of_nodes;
+    let multiplier = 1;
+
+    if (num_of_nodes > 15) {
+      visibleNodes = 5;
+      multiplier = Math.ceil(num_of_nodes / visibleNodes);
+    }
+
+    let angle = 0;
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < visibleNodes; i++) {
+        const y = startY + i * (2 * baseRadius + padding);
+        const scale = 1 + 0.1 * Math.sin(angle + i * 0.5);
+        const pulsingRadius = baseRadius * scale;
+
+        ctx.beginPath();
+        ctx.arc(startX, y, pulsingRadius, 0, 2 * Math.PI);
+        ctx.fillStyle = "#2e9cf7";
+        ctx.fill();
+        ctx.stroke();
+      }
+
+      if (multiplier > 1) {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        const labelY = startY + visibleNodes * (2 * baseRadius + padding) + 5;
+        ctx.fillText(`×${multiplier}`, startX, labelY);
+      }
+
+      angle += 0.05;
+      animationRef.current = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    window.addEventListener("resize", resizeCanvas);
+
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  }, [num_of_nodes]);
+
+  return <canvas ref={canvasRef} className="node-canvas" />;
+};
+
+export default Canvas;

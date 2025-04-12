@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import * as Blockly from "blockly";
-import { javascriptGenerator } from "blockly/javascript"; // ✅ ADD THIS
+import { javascriptGenerator } from "blockly/javascript"; 
 import "blockly/blocks";
 import "blockly/msg/en";
 import "./components/CustomBlocks";
@@ -78,9 +78,9 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
         controls: true,
         wheel: true,
         startScale: 1.0,
-        maxScale: 3,
-        minScale: 0.3,
-        scaleSpeed: 1.2,
+        maxScale: 4,
+        minScale: 0.1,
+        scaleSpeed: 1.3,
       },
     });
   
@@ -117,7 +117,7 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
           style={{ display: showWorkspace ? "block" : "none" }}
           
         />
-        <Canvas />
+        <Canvas num_of_nodes={5} />
         <pre>{code}</pre>
       </div>
       
