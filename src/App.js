@@ -102,11 +102,8 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
         let layers = [];
         let layerBlock = block.getInputTargetBlock("LAYERS");
         while (layerBlock) {
-          layers.push(Layer(parseInt(layerBlock.getFieldValue('numNodes')), layerBlock.getFieldValue('ACTIVATION')));
-          const activationFunction = layerBlock.getInputTargetBlock('ACTIVATION').type
-          console.log("activationFunction", ActivationFunction[activationFunction])
-          
-          console.log("numNodes", layerBlock.getFieldValue('numNodes'))
+          const activationFunction = ActivationFunction[layerBlock.getInputTargetBlock('ACTIVATION').type]
+          layers.push(Layer(parseInt(layerBlock.getFieldValue('numNodes')), activationFunction));
           layerBlock = layerBlock.getNextBlock(); // iterate through stacked Layer blocks
         }
 
