@@ -45,7 +45,7 @@ class Code {
     trainFun() {
         const train = ["def train(model, inputdata, outputdata, numepochs):", "\tfor epoch in range(numepochs):", "\t\tmodel.train()",
             "\t\toptimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)", `\t\tloss = nn.${this.network.lossFunction}`,
-            "\t\toutputs = model(inputdata)", "\t\toptimizer(outputs,  Y)", "\t\tloss.backward()", "\t\toptimizer.step()"
+            "\t\toutputs = model(inputdata)", "\t\terror = loss(outputs,  Y)", "\t\terror.backward()", "\t\toptimizer.step()"
         ];
 
         return train;
