@@ -1,11 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
-import Sidebar from "./components/Sidebar";
-import { BlocklyWorkspace } from "react-blockly";
-import { javascriptGenerator } from "blockly/javascript";
+import * as Blockly from "blockly";
 import "blockly/blocks";
-import "blockly/msg/en"; // make sure block messages show up
-import CustomBlocks from "./components/CustomBlocks"
+import "blockly/msg/en";
+import "./components/CustomBlocks"; // your custom blocks here
 
 const MY_TOOLBOX = {
   kind: "categoryToolbox",
@@ -27,24 +25,6 @@ const MY_TOOLBOX = {
       contents: [
         { kind: "block", type: "math_number" },
         { kind: "block", type: "math_arithmetic" },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Layer",
-      colour: "#5C81A6",
-      contents: [
-        { kind: "block", type: "controls_if" },
-        { kind: "block", type: "logic_compare" },
-        { kind: "block", type: "logic_boolean" },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Lists",
-      colour: "#745CA6",
-      contents: [
-        { kind: "block", type: "lists_create_with" },
       ],
     },
     {
@@ -85,45 +65,72 @@ const MY_TOOLBOX = {
         { kind: "block", type: "L1_LOSS" }
       ]
     }
-  ],
+  ]
 };
 
+
 function App() {
-  const [xml, setXml] = useState("<xml></xml>");
+  const blocklyDiv = useRef(null);
+  const toolboxRef = useRef(null);
+  const workspaceRef = useRef(null);
+  const [code, setCode] = useState("");
+
+  useEffect(() => {
+    workspaceRef.current = Blockly.inject(blocklyDiv.current, {
+      toolbox: toolboxRef.current,
+      grid: {
+        spacing: 20,
+        length: 3,
+        colour: "#ccc",
+        snap: true,
+      },
+      zoom: {
+        controls: true,
+        wheel: true,
+        startScale: 1.0,
+        maxScale: 3,
+        minScale: 0.3,
+        scaleSpeed: 1.2
+      }
+    });
+
+    // Optional: listener to auto-generate code
+    workspaceRef.current.addChangeListener(() => {
+      const code = Blockly.JavaScript.workspaceToCode(workspaceRef.current);
+      setCode(code);
+    });
+
+    return () => {
+      if (workspaceRef.current) {
+        workspaceRef.current.dispose();
+      }
+    };
+  }, []);
+
+  const generateCode = () => {
+    const code = javascriptGenerator.workspaceToCode(workspaceRef.current);
+    console.log("Generated JS code:", code);
+    setCode(code);
+  }
 
   return (
     <div className="screen">
-      <Sidebar />
+      <div className="sidebar">Sidebar Here</div>
 
       <div className="main-area">
-        <BlocklyWorkspace
-          className="blockly-workspace"
-          toolboxConfiguration={MY_TOOLBOX}
-          initialXml={xml}
-          onXmlChange={setXml}
-          workspaceConfiguration={{
-            grid: {
-              spacing: 20,
-              length: 3,
-              colour: "#ccc",
-              snap: true,
-            },
-            zoom: {
-              controls: true,
-              wheel: true,
-              startScale: 1.0,
-              maxScale: 3,
-              minScale: 0.3,
-              scaleSpeed: 1.2
-            }
-          }}
-          style={{ height: "600px", width: "100%" }}
-        />
-        <button onclick="ADD EVENT LISTENER HERE()"> ADD EVENT LISTENER() </button>
+        <div ref={blocklyDiv} className="blockly-workspace" />
+        <xml ref={toolboxRef} style={{ display: "none" }}>
+          {Blockly.utils.toolbox.convertToolboxDefToXml(MY_TOOLBOX).children}
+        </xml>
+
+        <button onClick={generateCode}>
+          Generate Code
+        </button>
+
+        <pre>{code}</pre>
       </div>
     </div>
   );
 }
-
 
 export default App;
