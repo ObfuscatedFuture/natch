@@ -97,8 +97,7 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
   const generateCode = () => {
     javascriptGenerator.forBlock['layer'] = function (block, generator) {
       const layer = Layer(block.getFieldValue('numNodes'), ActivationFunction.GELU)
-      const code = new Code(NeuralNetwork(5, 5, [layer], LossFunction.CROSS_ENTROPY));
-      return code.combineAll();
+      return layer
     };
       javascriptGenerator.forBlock['network'] = function (block, generator) {
         let layersCode = [];
@@ -120,12 +119,9 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
         // You now have layersCode = [layer1Code, layer2Code, ...]
         // and lossCode = "LossFunction.XYZ" or whatever the loss block generates
 
-        const code = `
-          const layers = [${layersCode.join(', ')}];
-          const loss = ${lossCode};
-          const net = new NeuralNetwork(5, 5, layers, loss);
-        `;
-        return code;
+       const generatedCode = new Code(NeuralNetwork(5, 5, layersCode, lossCode));
+        setCode(generatedCode.combineAll());
+        return generatedCode.combineAll();
       };
      
 
@@ -145,6 +141,31 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
       }
       return code;
     };
+
+    javascriptGenerator.forBlock['CROSS_ENTROPY'] = function () {
+      return "CROSS_ENTROPY"
+  }
+  javascriptGenerator.forBlock['MEAN_SQUARED_ERROR'] = function () {
+    return "MEAN_SQUARED_ERROR"
+  }
+  javascriptGenerator.forBlock['L1_LOSS'] = function () {
+    return "L1_LOSS"
+  }
+  javascriptGenerator['RELU'] = function () {
+  return ['"RELU"', javascriptGenerator.ORDER_ATOMIC];
+  };
+  javascriptGenerator.forBlock['SIGMOID'] = function () {
+  return ['"SIGMOID"', javascriptGenerator.ORDER_ATOMIC];
+  };
+  javascriptGenerator.forBlock['TANH'] = function () {
+  return ['"TANH"', javascriptGenerator.ORDER_ATOMIC];
+  };
+  javascriptGenerator.forBlock['SOFTMAX'] = function () {
+    return ['"SOFTMAX"', javascriptGenerator.ORDER_ATOMIC];
+  };
+  javascriptGenerator.forBlock['GELU'] = function () {
+    return ['"GELU"', javascriptGenerator.ORDER_ATOMIC];
+  };
 
     const generatedCode = javascriptGenerator.workspaceToCode(blocklyWorkspace.current);
     console.log("Generated JS code:", generatedCode);
