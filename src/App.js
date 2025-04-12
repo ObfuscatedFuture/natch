@@ -5,21 +5,25 @@ import { BlocklyWorkspace } from "react-blockly";
 import { javascriptGenerator } from "blockly/javascript";
 import "blockly/blocks";
 import "blockly/msg/en"; // make sure block messages show up
+import CustomBlocks from "./components/CustomBlocks"
 
 const MY_TOOLBOX = {
-  kind: "flyoutToolbox",
+  kind: "categoryToolbox",
   contents: [
     {
       kind: "category",
       name: "Logic",
+      colour: "#5C81A6",
       contents: [
         { kind: "block", type: "controls_if" },
-        { kind: "block", type: "controls_repeat_ext" },
+        { kind: "block", type: "logic_compare" },
+        { kind: "block", type: "logic_boolean" },
       ],
     },
     {
       kind: "category",
       name: "Math",
+      colour: "#5CA65C",
       contents: [
         { kind: "block", type: "math_number" },
         { kind: "block", type: "math_arithmetic" },
@@ -27,15 +31,33 @@ const MY_TOOLBOX = {
     },
     {
       kind: "category",
-      name: "Custom",
-      colour: "260",
+      name: "Layer",
+      colour: "#5C81A6",
       contents: [
-        { kind: "block", type: "layer" },
-        { kind: "block", type: "node" },
+        { kind: "block", type: "controls_if" },
+        { kind: "block", type: "logic_compare" },
+        { kind: "block", type: "logic_boolean" },
       ],
+    },
+    {
+      kind: "category",
+      name: "Lists",
+      colour: "#745CA6",
+      contents: [
+        { kind: "block", type: "lists_create_with" },
+      ],
+    },
+    {
+      kind: "category",
+      name: "Custom",
+      colour: "#AA66CC",
+      contents: [
+        { kind: "block", type: "layers" }
+      ]
     },
   ],
 };
+
 function App() {
   const [xml, setXml] = useState("<xml></xml>");
 
