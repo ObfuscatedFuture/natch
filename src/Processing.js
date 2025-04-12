@@ -15,7 +15,7 @@ export default class Code {
         const layers = this.layersToCode();
         const code = method.concat(layers);
 
-        const step = ["\tdef forwards(self, x):", "\t\treturn self.model(x)"];
+        const step = ["\tdef forward(self, x):", "\t\treturn self.model(x)"];
         const code2 = code.concat(step);
         const code3 = code2.concat(this.trainFun());
         return code3.join("\n");
@@ -43,7 +43,7 @@ export default class Code {
 
     trainFun() {
         const train = ["def train(model, inputdata, outputdata, numepochs):", "\tfor epoch in range(numepochs):", "\t\tmodel.train()",
-            "\t\toptimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)", `\t\tloss = nn.${this.network.lossFunction}`,
+            "\t\toptimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)", `\t\tloss = nn.${this.network.lossFunction}()`,
             "\t\toutputs = model(inputdata)", "\t\terror = loss(outputs,  Y)", "\t\terror.backward()", "\t\toptimizer.step()"
         ];
 
