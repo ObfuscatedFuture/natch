@@ -72,7 +72,8 @@ const MY_TOOLBOX = {
 
 
 function App() {
-  const blocklyDiv = useRef(null);
+  const blocklyDiv = useRef(null);          // for DOM node
+const blocklyWorkspace = useRef(null);    // for Blockly workspace
   const [code, setCode] = useState("");
   const [showWorkspace, setShowWorkspace] = useState(true);
 
@@ -82,9 +83,9 @@ function App() {
 
 
   useEffect(() => {
-    if (blocklyDiv == null || !blocklyDiv.current) return; // ✅ prevent crash on initial mount
+    if (!blocklyDiv.current) return;
   
-    blocklyDiv.current = Blockly.inject(blocklyDiv.current, {
+    blocklyWorkspace.current = Blockly.inject(blocklyDiv.current, {
       toolbox: MY_TOOLBOX,
       grid: {
         spacing: 20,
@@ -98,20 +99,20 @@ function App() {
         startScale: 1.0,
         maxScale: 3,
         minScale: 0.3,
-        scaleSpeed: 1.2
-      }
+        scaleSpeed: 1.2,
+      },
     });
-
-  return () => {
-    if (blocklyDiv.current) {
-      blocklyDiv.current.dispose();
-    }
-  };
-}, []);
+  
+    return () => {
+      if (blocklyWorkspace.current) {
+        blocklyWorkspace.current.dispose();
+      }
+    };
+  }, []);
   
 
   const generateCode = () => {
-    const code = javascriptGenerator.workspaceToCode(blocklyDiv.current);
+    const code = javascriptGenerator.workspaceToCode(blocklyWorkspace.current);
     console.log("Generated JS code:", code);
     setCode(code);
   }
