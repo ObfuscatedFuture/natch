@@ -12,26 +12,7 @@ const MY_TOOLBOX = {
   contents: [
     {
       kind: "category",
-      name: "Logic",
-      colour: "#5C81A6",
-      contents: [
-        { kind: "block", type: "controls_if" },
-        { kind: "block", type: "logic_compare" },
-        { kind: "block", type: "logic_boolean" },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Math",
-      colour: "#5CA65C",
-      contents: [
-        { kind: "block", type: "math_number" },
-        { kind: "block", type: "math_arithmetic" },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Custom",
+      name: "Layers",
       colour: "#AA66CC",
       contents: [
         { kind: "block", type: "layer" }
@@ -124,7 +105,7 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
           Generate Code
         </button>
         <button onClick={toggleWorkspace}>
-          {showWorkspace ? "Hide Workspace" : "Show Workspace"}
+          {showWorkspace ? "Show Visualization" : "Show Workspace"}
         </button>
       </div>
 
