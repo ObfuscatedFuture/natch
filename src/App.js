@@ -121,6 +121,10 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
           alert("No activation function block connected")
           return "ERROR"
         }
+        if (!Number.isInteger(layerBlock.getFieldValue('numNodes'))) {
+          alert("No number of nodes provided")
+          return "ERROR"
+        }
         const activationFunction = ActivationFunction[ layerBlock.getInputTargetBlock('ACTIVATION').type]
         
         layers.push(Layer(parseInt(layerBlock.getFieldValue('numNodes')), activationFunction));
@@ -138,6 +142,10 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
         return "ERROR"
       }
       const outputSize = block.getFieldValue('outputSize')
+      if (outputSize == null) {
+        alert("No output size provided")
+        return "ERROR"
+      }
 
       // You now have layersCode = [layer1Code, layer2Code, ...]
       // and lossCode = "LossFunction.XYZ" or whatever the loss block generates
