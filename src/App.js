@@ -8,6 +8,9 @@ import "./components/CustomBlocks";
 import Canvas from "./components/Canvas";
 import { Layer, ActivationFunction, NeuralNetwork, LossFunction } from "./models";
 import Code from "./Processing";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 
 const MY_TOOLBOX = {
   kind: "categoryToolbox",
@@ -192,18 +195,16 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
           
         />
         <Canvas num_of_nodes={5} />
-        <pre>{code}</pre>
-        
 
       </div>
       {visible && (
         <div className="CenteredBox">
           <button className="CloseButton" onClick={handleClose}>×</button>
-          <div className ="textfield">
-            <pre>{code}</pre>
-          </div>
-          
+          <SyntaxHighlighter language="python" style={oneDark} customStyle={{ height: '100%', overflow: 'auto' }}>
+            {code}
+          </SyntaxHighlighter>
         </div>
+
       )}
 
       
