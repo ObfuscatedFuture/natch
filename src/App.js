@@ -55,6 +55,18 @@ const MY_TOOLBOX = {
         { kind: "block", type: "layer" }
       ]
     },
+    {
+      kind: "category",
+      name: "Activation Funcs",
+      colour: "#AA66CC",
+      contents: [
+        { kind: "block", type: "RELU" },
+        { kind: "block", type: "SIGMOID" },
+        { kind: "block", type: "TANH" },
+        { kind: "block", type: "SOFTMAX" },
+        { kind: "block", type: "LINEAR" }
+      ]
+    }
   ],
 };
 
