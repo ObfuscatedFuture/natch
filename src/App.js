@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import * as Blockly from "blockly";
+import { javascriptGenerator } from "blockly/javascript"; // ✅ ADD THIS
 import "blockly/blocks";
 import "blockly/msg/en";
-import "./components/CustomBlocks"; // your custom blocks here
+import "./components/CustomBlocks";
+
+
 
 const MY_TOOLBOX = {
   kind: "categoryToolbox",
@@ -76,8 +79,10 @@ function App() {
   const [code, setCode] = useState("");
 
   useEffect(() => {
+    if (!blocklyDiv.current) return; // ✅ prevent crash on initial mount
+  
     workspaceRef.current = Blockly.inject(blocklyDiv.current, {
-      toolbox: toolboxRef.current,
+      toolbox: MY_TOOLBOX,
       grid: {
         spacing: 20,
         length: 3,
@@ -93,19 +98,19 @@ function App() {
         scaleSpeed: 1.2
       }
     });
-
-    // Optional: listener to auto-generate code
+  
     workspaceRef.current.addChangeListener(() => {
-      const code = Blockly.JavaScript.workspaceToCode(workspaceRef.current);
+      const code = javascriptGenerator.workspaceToCode(workspaceRef.current);
       setCode(code);
     });
-
+  
     return () => {
       if (workspaceRef.current) {
         workspaceRef.current.dispose();
       }
     };
   }, []);
+  
 
   const generateCode = () => {
     const code = javascriptGenerator.workspaceToCode(workspaceRef.current);
@@ -119,9 +124,7 @@ function App() {
 
       <div className="main-area">
         <div ref={blocklyDiv} className="blockly-workspace" />
-        <xml ref={toolboxRef} style={{ display: "none" }}>
-          {Blockly.utils.toolbox.convertToolboxDefToXml(MY_TOOLBOX).children}
-        </xml>
+      
 
         <button onClick={generateCode}>
           Generate Code
