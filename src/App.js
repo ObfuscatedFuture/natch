@@ -18,7 +18,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Layers",
-      colour: "#AA66CC",
+      colour: "#d4f4dd",
       contents: [
         { kind: "block", type: "layer" }
       ]
@@ -26,7 +26,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Activation Funcs",
-      colour: "#AA66CC",
+      colour: "#4b1d3f",
       contents: [
         { kind: "block", type: "RELU" },
         { kind: "block", type: "SIGMOID" },
@@ -46,7 +46,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Loss Functions",
-      colour: "#AA66CC",
+      colour: "#d62246",
       contents: [
         { kind: "block", type: "CROSS_ENTROPY" },
         { kind: "block", type: "MEAN_SQUARED_ERROR" },
