@@ -121,7 +121,7 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
           alert("No activation function block connected")
           return "ERROR"
         }
-        if (!Number.isInteger(layerBlock.getFieldValue('numNodes'))) {
+        if (parseInt(layerBlock.getFieldValue('numNodes')) === 'NaN') {
           alert("No number of nodes provided")
           return "ERROR"
         }
