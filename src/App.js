@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import * as Blockly from "blockly";
-import { javascriptGenerator } from "blockly/javascript"; 
+import { javascriptGenerator, Order } from "blockly/javascript"; 
 import "blockly/blocks";
 import "blockly/msg/en";
 import "./components/CustomBlocks";
