@@ -69,6 +69,9 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
   const [neuralNetwork, setNeuralNetwork] = useState(null)
 
   const toggleWorkspace = () => {
+    if (showWorkspace) { // we are showing the visualization
+      generateCode(false)
+    }
     setShowWorkspace(prev => !prev);
   };
 
@@ -102,10 +105,9 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
   }, []);
   
 
-  const generateCode = () => {
+  const generateCode = (showCode=true) => {
       // Render conditionally
-    setVisible(prev => !prev)
-
+    setVisible(showCode)
     javascriptGenerator.forBlock['network'] = function (block, generator) {
       let layers = [];
       let layerBlock = block.getInputTargetBlock("LAYERS");
@@ -175,7 +177,7 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
           style={{ display: showWorkspace ? "block" : "none" }}
           
         />
-        <NeuralNetworkVisualizer layers={[4,2,3,4,5]}></NeuralNetworkVisualizer>
+        {neuralNetwork != null ? <NeuralNetworkVisualizer nnObj={neuralNetwork}></NeuralNetworkVisualizer> :null}
 
       </div>
       {visible && (

@@ -1,32 +1,46 @@
 import React from "react";
 
-export default function NeuralNetworkVisualizer({ layers }) {
-  const layerGap = 200;
-  const nodeGap = 60;
-  const nodeRadius = 15;
+const layerGap = 200;
+const nodeGap = 60;
+const nodeRadius = 15;
+export default function NeuralNetworkVisualizer({ nnObj }) {
 
-  const getMaxNodes = () => Math.max(...layers);
+  /**
+ *  
+ * @param {number} outputSize 
+ * @param {Layer[]} layers 
+ * @param {string} lossFunction 
+ * @return {object}
+ */
+/**
+* 
+* @param {number} numNodes 
+* @param {string} activationFunction 
+*/
+  const getLayers = () => nnObj.layers.map(x => x.numNodes)
+
+  const getMaxNodes = () => Math.max(...getLayers());
 
   const getNodePosition = (layerIndex, nodeIndex) => {
     const x = layerIndex * layerGap + nodeRadius * 2;
-    const totalNodes = layers[layerIndex];
+    const totalNodes = getLayers()[layerIndex];
     const height = getMaxNodes() * nodeGap;
     const yOffset = (height - totalNodes * nodeGap) / 2 + nodeGap / 2;
     const y = nodeIndex * nodeGap + yOffset + nodeRadius;
     return { x, y };
   };
 
-  const width = layers.length * layerGap + 100;
+  const width = getLayers().length * layerGap + 100;
   const height = getMaxNodes() * nodeGap + 100;
 
   return (
     <svg width={width} height={height} className="bg-white">
       {/* Draw connections */}
-      {layers.map((nodeCount, layerIndex) => {
-        if (layerIndex === layers.length - 1) return null;
+      {getLayers().map((nodeCount, layerIndex) => {
+        if (layerIndex === getLayers().length - 1) return null;
         return Array.from({ length: nodeCount }).flatMap((_, nodeIndex) => {
           const from = getNodePosition(layerIndex, nodeIndex);
-          return Array.from({ length: layers[layerIndex + 1] }).map((_, nextNodeIndex) => {
+          return Array.from({ length: getLayers()[layerIndex + 1] }).map((_, nextNodeIndex) => {
             const to = getNodePosition(layerIndex + 1, nextNodeIndex);
             return (
               <line
@@ -44,7 +58,7 @@ export default function NeuralNetworkVisualizer({ layers }) {
       })}
 
       {/* Draw nodes */}
-      {layers.map((nodeCount, layerIndex) => (
+      {getLayers().map((nodeCount, layerIndex) => (
         <g key={`layer-${layerIndex}`}>
           {Array.from({ length: nodeCount }).map((_, nodeIndex) => {
             const { x, y } = getNodePosition(layerIndex, nodeIndex);
