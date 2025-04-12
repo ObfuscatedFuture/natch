@@ -46,13 +46,34 @@ class NeuralNetwork {
     addLayer(numNodes, activationFunction) {
         this.layers.push(Layer(numNodes, activationFunction));
     }
+
+    isValid() {
+        return this.lossFunction != null && this.input != null &&
+            this.layers.every(item => item.numNodes > 0);
+    }
 }
 
 class Layer {
-    constructor(numNodes, activationFunction) {
-        this.numNodes = numNodes;
-        this.activationFunction = activationFunction;
+    constructor() {
+        this.numNodes = 0;
+        this.activationFunction = null;
         this.output = [];
+    }
+
+    /**
+     * 
+     * @param {number} num 
+     */
+    addNodes(num) {
+        this.numNodes = num;
+    }
+
+    /**
+     * 
+     * @param {ActivationFunction} activationFunction 
+     */
+    chooseActivationFunction(activationFunction) {
+        this.activationFunction = activationFunction;
     }
 }
 
