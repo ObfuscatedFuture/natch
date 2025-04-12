@@ -32,7 +32,7 @@ const MY_TOOLBOX = {
     },
     {
       kind: "category",
-      name: "Layers",
+      name: "Custom",
       colour: "#AA66CC",
       contents: [
         { kind: "block", type: "layer" }
@@ -46,7 +46,8 @@ const MY_TOOLBOX = {
         { kind: "block", type: "RELU" },
         { kind: "block", type: "SIGMOID" },
         { kind: "block", type: "TANH" },
-        { kind: "block", type: "SOFTMAX" }
+        { kind: "block", type: "SOFTMAX" },
+
       ]
     },
     {
@@ -113,15 +114,17 @@ function App() {
 
   return (
     <div className="screen">
-      <div className="sidebar">Sidebar Here</div>
+      <div className="sidebar">Sidebar Here
+      <button onClick={generateCode}>
+          Generate Code
+        </button>
+      </div>
 
       <div className="main-area">
         <div ref={blocklyDiv} className="blockly-workspace" />
       
 
-        <button onClick={generateCode}>
-          Generate Code
-        </button>
+        
 
         <pre>{code}</pre>
       </div>
