@@ -15,8 +15,8 @@ export const ActivationFunction = Object.freeze({
 export const Optimizer = Object.freeze({
     SGD: "SGD",
     ADAM: "Adam",
-    RMSPROP: "RMSProp",
-    ADAGRAD: "AdaGrad",
+    RMSPROP: "RMSprop",
+    ADAGRAD: "Adagrad",
 })
 
 /**
