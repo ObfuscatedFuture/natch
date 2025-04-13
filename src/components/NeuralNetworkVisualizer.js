@@ -36,9 +36,14 @@ export default function NeuralNetworkVisualizer({ nnObj }) {
 
   const width = getLayers().length * layerGap + 100;
   const height = getMaxNodes() * nodeGap + 100;
-
   return (
-    <svg width={width} height={height} className="bg-white">
+    <svg
+      viewBox={`0 0 ${width} ${height}`}  // Internal coordinate system
+      width="100%"                        // Scales to fill parent width
+      height="100%"                       // Scales to fill parent height
+      className="bg-white"
+      preserveAspectRatio="xMidYMid meet" // Keeps aspect ratio centered
+    >
       {/* Draw connections */}
       {getLayers().map((nodeCount, layerIndex) => {
         if (layerIndex === getLayers().length - 1) return null;
@@ -60,7 +65,7 @@ export default function NeuralNetworkVisualizer({ nnObj }) {
           });
         });
       })}
-
+  
       {/* Draw nodes */}
       {getLayers().map((nodeCount, layerIndex) => (
         <g key={`layer-${layerIndex}`}>
@@ -81,4 +86,4 @@ export default function NeuralNetworkVisualizer({ nnObj }) {
       ))}
     </svg>
   );
-}
+}  
