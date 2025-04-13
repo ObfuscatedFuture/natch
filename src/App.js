@@ -72,18 +72,18 @@ function App() {
   const blocklyDiv = useRef(null);          // for DOM node
   const blocklyWorkspace = useRef(null);    // for Blockly workspace
   const [code, setCode] = useState("");
-  const [showWorkspace, setShowWorkspace] = useState(true);
+  const [showCode, setShowCode] = useState(true);
 
   const [visible, setVisible] = useState(false);
   const handleClose = () => setVisible(false);
 
   const [neuralNetwork, setNeuralNetwork] = useState(null)
 
-  const toggleWorkspace = () => {
-    if (showWorkspace) { // we are showing the visualization
+  const toggleCode = () => {
+    if (showCode) { // we are showing the visualization
       generateCode(false)
     }
-    setShowWorkspace(prev => !prev);
+    setShowCode(prev => !prev);
   };
 
 
@@ -185,35 +185,37 @@ function App() {
 
   return (
     <div className="screen">
-      <div className="footer">
-      <button onClick={generateCode}>
-          Generate Code
-        </button>
-        <button onClick={toggleWorkspace}>
-          {showWorkspace ? "Show Visualization" : "Show Workspace"}
-        </button>
-      </div>
-
       <div className="main-area">
-        
+        <div className = "tab-bar"> 
+          <div className = "side-content">
+          {visible && (
+          <>
+            <button className="CloseButton" onClick={handleClose}>×</button>
+            <SyntaxHighlighter language="python" style={oneDark} customStyle={{ height: '100%', overflow: 'auto' }}>
+              {code}
+            </SyntaxHighlighter>
+          </>
+          )}
+          {neuralNetwork != null ? <NeuralNetworkVisualizer nnObj={neuralNetwork}></NeuralNetworkVisualizer> :null}
+
+          </div>
+         <div className="tabs">
+            <button onClick={generateCode}>
+                Generate Code
+              </button>
+              <button onClick = {() => setVisible(!visible)}>
+                Show Visualization
+              </button>
+          </div>
+        </div>
+      
         <div
           ref={blocklyDiv}
           className="blockly-workspace"
-          style={{ display: showWorkspace ? "block" : "none" }}
-          
         />
-        {neuralNetwork != null ? <NeuralNetworkVisualizer nnObj={neuralNetwork}></NeuralNetworkVisualizer> :null}
-
+        
       </div>
-      {visible && (
-        <div className="CenteredBox">
-          <button className="CloseButton" onClick={handleClose}>×</button>
-          <SyntaxHighlighter language="python" style={oneDark} customStyle={{ height: '100%', overflow: 'auto' }}>
-            {code}
-          </SyntaxHighlighter>
-        </div>
-
-      )}
+      
     </div>
   );
 }
