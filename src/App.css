@@ -6,30 +6,22 @@
     overflow: hidden;
   }
   
-  .footer {
-    width: 100%;
-    background-color: #1f1f1f;
-    height: 10%;
-    z-index: 999;
-    user-select: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-}
 
-.footer button {
+.tab-bar button {
     background-color: #333;
     color: white;
     border: none;
-    padding: 10px 15px;
-    margin: 10px;
     cursor: pointer;
-    border-radius: 4px;
+    margin-left: 0.5rem;
+    border-radius:10%;
     font-size: 1rem;
+    height:100%;
     transition: background-color 0.3s ease;
+    padding-bottom: 0.3rem;
+    padding-top: 0.3rem;
 }
 
-.footer button:hover {
+.tab-bar button:hover {
     background-color: #555;
 }
 
@@ -37,10 +29,35 @@
   .main-area {
     flex: 1;
     position: relative;
-    height: 90%;
+    height: 100%;
     width: 100%;
     overflow: auto;
     background-color: #f0f0f0;
+  }
+  .tab-bar {
+    top: 0;
+    width:40%;
+    right:0;
+    background-color: #fafafa;
+    height: 100%;
+    z-index: 999;
+    user-select: none;
+    position: fixed;
+  }
+  .side-content {
+    top:10%;
+    width:100%;
+    height:90%;
+  }
+  .tabs {
+    top: 0;
+    width:40%;
+    right:0;
+    background-color: #1f1f1f;
+    height: 10%;
+    z-index: 999;
+    user-select: none;
+    position: fixed;
   }
   .blockly-workspace {
     height: 100%;
@@ -48,19 +65,17 @@
   }
   .CenteredBox {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 10%;
+    right: 0;
     transform: translate(-50%, -50%);
     background: white;
-    border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 9999;
     min-width: 300px;
-    width: 50%;
-    max-height: 65%;
+    width: 40%;
+    max-height: 100%;
     overflow:scroll;
-    
 
   }
   
