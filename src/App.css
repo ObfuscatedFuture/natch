@@ -45,10 +45,17 @@
     position: fixed;
   }
   .side-content {
-    top:10%;
-    width:100%;
-    height:90%;
+    position: fixed;
+    top: 9%;        /* Starts right after the .tabs (which is 10% high) */
+    right: 0;
+    width: 40%;
+    height: 90%;      /* Remaining height */
+    background-color: #fafafa;
+    z-index: 998;     /* Slightly lower than .tabs */
+    overflow-y: scroll; /* Optional: scrolling if needed */
+    overflow-x: scroll;
   }
+  
   .tabs {
     top: 0;
     width:40%;

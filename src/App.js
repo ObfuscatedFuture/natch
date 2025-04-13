@@ -174,7 +174,14 @@ function App() {
       const generatedCode = new Code(neuralNetwork);
       return generatedCode.combineAll();
     };
-
+    Object.keys(Blockly.Blocks).forEach((blockType) => {
+      if (blockType === "network") return
+      javascriptGenerator.forBlock[blockType] = function (block, generator) {
+        return ""
+      };
+    })
+    
+    
     const generatedCode = javascriptGenerator.workspaceToCode(blocklyWorkspace.current);
     if (generatedCode === "ERROR") {
       setVisible(false)
@@ -192,7 +199,6 @@ function App() {
           <div className = "side-content">
           {visible && (
           <>
-            <button className="CloseButton" onClick={handleClose}>×</button>
             <SyntaxHighlighter language="python" style={oneDark} customStyle={{ height: '100%', overflow: 'auto' }}>
               {code}
             </SyntaxHighlighter>
@@ -200,8 +206,7 @@ function App() {
           )}
           {neuralNetwork != null ? <NeuralNetworkVisualizer nnObj={neuralNetwork}></NeuralNetworkVisualizer> :null}
 
-          </div>
-         <div className="tabs">
+          <div className="tabs">
             <button onClick={generateCode}>
                 Generate Code
               </button>
@@ -209,6 +214,8 @@ function App() {
                 Show Visualization
               </button>
           </div>
+          </div>
+         
         </div>
       
         <div
