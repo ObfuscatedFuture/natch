@@ -26,7 +26,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Activation Funcs",
-      colour: "#fe4a49",
+      colour: "#410880",
       contents: [
         { kind: "label", text: "Activation functions are applied to the output of a neuron in the network to represent non-linear relationships."},
         { kind: "block", type: "RELU" },
@@ -57,7 +57,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Optimizers",
-      colour: "#fe4a49",
+      colour: "#2C8F05",
       contents: [
         { kind: "label", text: "Optimizers help the NN 'learn' how to achieve the actual output values."},
         { kind: "block", type: "SGD" },

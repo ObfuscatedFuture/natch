@@ -58,7 +58,7 @@ Blockly.Blocks['layer'] = {
     }
   };
 
-  const color = "#fe4a49";
+  const color = "#2C8F05";
   Blockly.Blocks['SGD'] = {
     init: function () {
         this.appendDummyInput()
@@ -101,12 +101,14 @@ Blockly.Blocks['RMSPROP'] = {
   }
 };
 
+const color2 = "#fe4a49";
+
 Blockly.Blocks['CROSS_ENTROPY'] = {
 init: function () {
     this.appendDummyInput()
         .appendField("Cross Entropy");
     this.setOutput(true, "LossFunc"); 
-    this.setColour(color);
+    this.setColour(color2);
     this.setTooltip("Computes difference between two probaiblity distribution of variables. Penalizes for being very confident and wrong. Used for multi-class classification tasks.");
     this.setHelpUrl("https://neptune.ai/blog/pytorch-loss-functions#Cross-Entropy");
 }
@@ -117,7 +119,7 @@ Blockly.Blocks['MEAN_SQUARED_ERROR'] = {
         this.appendDummyInput()
             .appendField("Mean Squared Error");
         this.setOutput(true, "LossFunc"); 
-        this.setColour(color);
+        this.setColour(color2);
         this.setTooltip("Computes the average of squared differences between actual and predicted values. Easiest to use and understand.");
         this.setHelpUrl("https://neptune.ai/blog/pytorch-loss-functions#Mean-Squared-Error");
     }
@@ -130,7 +132,7 @@ Blockly.Blocks['L1_LOSS'] = {
         this.appendDummyInput()
             .appendField("L1_Loss");
         this.setOutput(true, "LossFunc"); 
-        this.setColour(color);
+        this.setColour(color2);
         this.setTooltip("Computes average of sum of absolute differences between actual and predicted values. Useful for regression since it is robust to outliers.");
          this.setHelpUrl("https://neptune.ai/blog/pytorch-loss-functions#Mean-Absolute-Error");
     }
@@ -139,7 +141,9 @@ Blockly.Blocks['L1_LOSS'] = {
 javascriptGenerator.forBlock['L1_LOSS'] = function () {
     return ['"L1_LOSS"', javascriptGenerator.ORDER_ATOMIC];
   };
-  
+ 
+const color3 = "#410880";  
+
 /*
 CROSS_ENTROPY: Symbol("CROSS_ENTROPY"),
     MEAN_SQUARED_ERROR: Symbol("MEAN_SQUARED_ERROR"),
@@ -150,7 +154,7 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("RELU");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(color);
+      this.setColour(color3);
       this.setTooltip("Most commonly used activation function. Simple and fast, but outputs 0 for negatives.");
       this.setHelpUrl("https://medium.com/@bhavaninetha222/activation-functions-explained-types-uses-and-importance-in-deep-learning-84eb8584a895");
     }
@@ -161,7 +165,7 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("SIGMOID");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(color);
+      this.setColour(color3);
       this.setTooltip("S-shaped, smooth curve ranging from 0 to 1. Commonly used in binary classification.");
       this.setHelpUrl("https://medium.com/@bhavaninetha222/activation-functions-explained-types-uses-and-importance-in-deep-learning-84eb8584a895");
     }
@@ -172,7 +176,7 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("TANH");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(color);
+      this.setColour(color3);
       this.setTooltip("Same as Sigmoid, except centered at 0 from -1 to 1.");
       this.setHelpUrl("https://medium.com/@bhavaninetha222/activation-functions-explained-types-uses-and-importance-in-deep-learning-84eb8584a895");
     }
@@ -183,7 +187,7 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("SOFTMAX");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(color);
+      this.setColour(color3);
       this.setTooltip("Used in output layer for multi-classification problems. ");
       this.setHelpUrl("https://medium.com/@bhavaninetha222/activation-functions-explained-types-uses-and-importance-in-deep-learning-84eb8584a895");
     }
@@ -194,7 +198,7 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("GELU");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(color);
+      this.setColour(color3);
       this.setTooltip("Similar to ReLu. Offers a range of negative values for small negative values.");
       this.setHelpUrl("https://medium.com/@shauryagoel/gelu-gaussian-error-linear-unit-4ec59fb2e47c");
     }
