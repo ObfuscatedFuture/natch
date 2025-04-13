@@ -6,7 +6,7 @@ import "blockly/blocks";
 import "blockly/msg/en";
 import "./components/CustomBlocks";
 import NeuralNetworkVisualizer from "./components/NeuralNetworkVisualizer";
-import { Layer, ActivationFunction, NeuralNetwork, LossFunction } from "./models";
+import { Layer, ActivationFunction, Optimizer, NeuralNetwork, LossFunction } from "./models";
 import Code from "./Processing";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -51,6 +51,17 @@ const MY_TOOLBOX = {
         { kind: "block", type: "CROSS_ENTROPY" },
         { kind: "block", type: "MEAN_SQUARED_ERROR" },
         { kind: "block", type: "L1_LOSS" }
+      ]
+    },
+    {
+      kind: "category",
+      name: "Optimizers",
+      colour: "#f2a900",
+      contents: [
+        { kind: "block", type: "SGD" },
+        { kind: "block", type: "ADAM" },
+        { kind: "block", type: "RMSPROP" },
+        { kind: "block", type: "ADAGRAD" }
       ]
     }
   ]
@@ -147,10 +158,16 @@ function App() {
         return "ERROR"
       }
 
+      const optimizer = Optimizer[block.getInputTargetBlock("OPTIMIZER").type]
+      if (block.getInputTargetBlock('OPTIMIZER') === null) {
+        alert("No optimizer provided")
+        return "ERROR"
+      }
+
       // You now have layersCode = [layer1Code, layer2Code, ...]
       // and lossCode = "LossFunction.XYZ" or whatever the loss block generates
       
-      const neuralNetwork = NeuralNetwork(outputSize, layers, lossBlock);
+      const neuralNetwork = NeuralNetwork(outputSize, layers, lossBlock, optimizer);
       setNeuralNetwork(neuralNetwork)
       const generatedCode = new Code(neuralNetwork);
       return generatedCode.combineAll();

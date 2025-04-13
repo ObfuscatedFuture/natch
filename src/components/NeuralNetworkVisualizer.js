@@ -5,20 +5,23 @@ const nodeGap = 60;
 const nodeRadius = 15;
 export default function NeuralNetworkVisualizer({ nnObj }) {
 
-  /**
- *  
- * @param {number} outputSize 
- * @param {Layer[]} layers 
- * @param {string} lossFunction 
- * @return {object}
- */
 /**
 * 
 * @param {number} numNodes 
 * @param {string} activationFunction 
 */
   const getLayers = () => nnObj.layers.map(x => x.numNodes).concat([nnObj.outputSize])
-  
+  const getIcons = () => nnObj.layers.map(x => x.activationFunction)
+
+  /*
+  export const ActivationFunction = Object.freeze({
+    RELU: "ReLu",
+    SIGMOID: "Sigmoid",
+    TANH: "Tanh",
+    SOFTMAX: "Softmax",
+    GELU: "Gelu"
+})
+  */
 
   const getMaxNodes = () => Math.max(...getLayers());
 
