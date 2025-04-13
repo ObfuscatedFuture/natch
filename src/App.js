@@ -74,7 +74,6 @@ function App() {
   const blocklyDiv = useRef(null);          // for DOM node
   const blocklyWorkspace = useRef(null);    // for Blockly workspace
   const [code, setCode] = useState("");
-  const [showCode, setShowCode] = useState(true);
 
   const [visible, setVisible] = useState(false);
   const handleClose = () => setVisible(false);
@@ -82,10 +81,10 @@ function App() {
   const [neuralNetwork, setNeuralNetwork] = useState(null)
 
   const toggleCode = () => {
-    if (showCode) { // we are showing the visualization
+    if (visible) { // we are showing the visualization
       generateCode(false)
     }
-    setShowCode(prev => !prev);
+    setVisible(prev => !prev);
   };
 
 
@@ -204,7 +203,7 @@ function App() {
             </SyntaxHighlighter>
           </>
           )}
-          {neuralNetwork != null ? <NeuralNetworkVisualizer nnObj={neuralNetwork}></NeuralNetworkVisualizer> :null}
+          {neuralNetwork != null && !visible ? <NeuralNetworkVisualizer nnObj={neuralNetwork}></NeuralNetworkVisualizer> :null}
 
           <div className="tabs">
             <button onClick={generateCode}>
