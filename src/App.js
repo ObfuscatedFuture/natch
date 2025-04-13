@@ -172,7 +172,14 @@ function App() {
       const generatedCode = new Code(neuralNetwork);
       return generatedCode.combineAll();
     };
-
+    Object.keys(Blockly.Blocks).forEach((blockType) => {
+      if (blockType === "network") return
+      javascriptGenerator.forBlock[blockType] = function (block, generator) {
+        return ""
+      };
+    })
+    
+    
     const generatedCode = javascriptGenerator.workspaceToCode(blocklyWorkspace.current);
     if (generatedCode === "ERROR") {
       setVisible(false)
