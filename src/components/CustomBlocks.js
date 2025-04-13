@@ -63,8 +63,8 @@ Blockly.Blocks['SGD'] = {
             .appendField("SGD");
         this.setOutput(true, "Optimizer");
         this.setColour(260);
-        this.setTooltip("Stochastic Gradient Descent");
-        this.setHelpUrl("");
+        this.setTooltip("Randomly selects subset of data to calculate the optimal values to never get stuck at an unoptimal point.");
+        this.setHelpUrl("https://towardsdatascience.com/neural-network-optimizers-made-simple-core-algorithms-and-why-they-are-needed-7fd072cd2788/");
     }
 };
 Blockly.Blocks['ADAM'] = {
@@ -73,8 +73,8 @@ Blockly.Blocks['ADAM'] = {
             .appendField("ADAM");
         this.setOutput(true, "Optimizer");
         this.setColour(260);
-        this.setTooltip("ADAM");
-        this.setHelpUrl("");
+        this.setTooltip("Most commonly used one. Combines both SGD and RMS");
+        this.setHelpUrl("https://medium.com/analytics-vidhya/optimizer-loss-functions-in-neural-network-2520c244cc22");
     }
 };
 Blockly.Blocks['ADAGRAD'] = {
@@ -83,8 +83,8 @@ Blockly.Blocks['ADAGRAD'] = {
             .appendField("ADAGRAD");
         this.setOutput(true, "Optimizer");
         this.setColour(260);
-        this.setTooltip("ADAGRAD");
-        this.setHelpUrl("");
+        this.setTooltip("Ensures that the NN reaches optimization at a standard rate based on all the steps taken.");
+        this.setHelpUrl("https://medium.com/@brijesh_soni/understanding-the-adagrad-optimization-algorithm-an-adaptive-learning-rate-approach-9dfaae2077bb");
     }
 };
 
@@ -94,8 +94,8 @@ Blockly.Blocks['RMSPROP'] = {
             .appendField("RMSPROP");
         this.setOutput(true, "Optimizer");
         this.setColour(260);
-        this.setTooltip("RMSPROP");
-        this.setHelpUrl("");
+        this.setTooltip("Ensures that the NN reaches optimization at a standard rate based on the most recent steps taken.");
+        this.setHelpUrl("https://medium.com/analytics-vidhya/optimizer-loss-functions-in-neural-network-2520c244cc22");
     }
 };
 const color = "#CCE2E9";
@@ -106,7 +106,7 @@ init: function () {
         .appendField("Cross Entropy");
     this.setOutput(true, "LossFunc"); 
     this.setColour(color);
-    this.setTooltip("Computes difference between two probaiblity distribution of variables. Penalizes for being very confident and wrong. Used for multi-class classification tasks.");
+    this.setTooltip("Computes difference between two probability distribution of variables. Penalizes for being very confident and wrong. Used for multi-class classification tasks.");
     this.setHelpUrl("https://neptune.ai/blog/pytorch-loss-functions#Cross-Entropy");
 }
 };
