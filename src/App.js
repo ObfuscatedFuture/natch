@@ -18,7 +18,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Layers",
-      colour: "#83c5be",
+      colour: "#fed766",
       contents: [
         { kind: "block", type: "layer" }
       ]
@@ -26,7 +26,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Activation Funcs",
-      colour: "#CCE2E9",
+      colour: "#fe4a49",
       contents: [
         { kind: "label", text: "Activation functions are applied to the output of a neuron in the network to represent non-linear relationships."},
         { kind: "block", type: "RELU" },
@@ -38,7 +38,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Network",
-      colour: "#006d77",
+      colour: "#009fb7",
       contents: [
         { kind: "block", type: "network" },
       ]
@@ -46,7 +46,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Loss Functions",
-      colour: "#CCE2E9",
+      colour: "#fe4a49",
       contents: [
         { kind: "label", text: "Loss functions are applied to the predictions from the NN and actual value to calculate how wrong the NN is."},
         { kind: "block", type: "CROSS_ENTROPY" },
@@ -57,7 +57,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Optimizers",
-      colour: "#f2a900",
+      colour: "#fe4a49",
       contents: [
         { kind: "label", text: "Optimizers help the NN 'learn' how to achieve the actual output values."},
         { kind: "block", type: "SGD" },
