@@ -5,13 +5,6 @@ const nodeGap = 60;
 const nodeRadius = 15;
 export default function NeuralNetworkVisualizer({ nnObj }) {
 
-  /**
- *  
- * @param {number} outputSize 
- * @param {Layer[]} layers 
- * @param {string} lossFunction 
- * @return {object}
- */
 /**
 * 
 * @param {number} numNodes 

@@ -39,6 +39,10 @@ Blockly.Blocks['network'] = {
         .setCheck("LossFunc")
         .appendField("Loss Func:");
 
+      this.appendValueInput("OPTIMIZER")
+          .setCheck("Optimizer")
+          .appendField("Optimizer:");
+
     this.appendDummyInput()
         .appendField("Number of Output Nodes:");
     this.appendDummyInput()
@@ -53,7 +57,47 @@ Blockly.Blocks['network'] = {
     
   }
 };
-  
+Blockly.Blocks['SGD'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("SGD");
+        this.setOutput(true, "Optimizer");
+        this.setColour(260);
+        this.setTooltip("Stochastic Gradient Descent");
+        this.setHelpUrl("");
+    }
+};
+Blockly.Blocks['ADAM'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("ADAM");
+        this.setOutput(true, "Optimizer");
+        this.setColour(260);
+        this.setTooltip("ADAM");
+        this.setHelpUrl("");
+    }
+};
+Blockly.Blocks['ADAGRAD'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("ADAGRAD");
+        this.setOutput(true, "Optimizer");
+        this.setColour(260);
+        this.setTooltip("ADAGRAD");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Blocks['RMSPROP'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("RMSPROP");
+        this.setOutput(true, "Optimizer");
+        this.setColour(260);
+        this.setTooltip("RMSPROP");
+        this.setHelpUrl("");
+    }
+};
 const color = "#CCE2E9";
 
 Blockly.Blocks['CROSS_ENTROPY'] = {

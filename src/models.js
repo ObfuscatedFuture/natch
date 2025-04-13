@@ -12,15 +12,23 @@ export const ActivationFunction = Object.freeze({
     GELU: "Gelu"
 })
 
+export const Optimizer = Object.freeze({
+    SGD: "SGD",
+    ADAM: "Adam",
+    RMSPROP: "RMSProp",
+    ADAGRAD: "AdaGrad",
+})
+
 /**
  *  
  * @param {number} outputSize 
  * @param {Layer[]} layers 
  * @param {string} lossFunction 
+ * @param {string} optimizer
  * @return {object}
  */
-export function NeuralNetwork(outputSize, layers, lossFunction) {
-    return { inputSize: layers[0].inputSize, outputSize, layers, lossFunction }
+export function NeuralNetwork(outputSize, layers, lossFunction, optimizer) {
+    return { inputSize: layers[0].inputSize, outputSize, layers, lossFunction, optimizer }
 }
 
 /**
