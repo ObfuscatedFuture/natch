@@ -11,7 +11,17 @@ export default function NeuralNetworkVisualizer({ nnObj }) {
 * @param {string} activationFunction 
 */
   const getLayers = () => nnObj.layers.map(x => x.numNodes).concat([nnObj.outputSize])
-  
+  const getIcons = () => nnObj.layers.map(x => x.activationFunction)
+
+  /*
+  export const ActivationFunction = Object.freeze({
+    RELU: "ReLu",
+    SIGMOID: "Sigmoid",
+    TANH: "Tanh",
+    SOFTMAX: "Softmax",
+    GELU: "Gelu"
+})
+  */
 
   const getMaxNodes = () => Math.max(...getLayers());
 
