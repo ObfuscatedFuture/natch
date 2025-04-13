@@ -32,7 +32,7 @@ const MY_TOOLBOX = {
         { kind: "block", type: "SIGMOID" },
         { kind: "block", type: "TANH" },
         { kind: "block", type: "SOFTMAX" },
-
+        { kind: "label", text: "Activation functions are applied to the output of a neuron in the network to represent complex non-linear relationships."}
       ]
     },
     {
@@ -50,7 +50,8 @@ const MY_TOOLBOX = {
       contents: [
         { kind: "block", type: "CROSS_ENTROPY" },
         { kind: "block", type: "MEAN_SQUARED_ERROR" },
-        { kind: "block", type: "L1_LOSS" }
+        { kind: "block", type: "L1_LOSS" },
+        { kind: "label", text: "Loss functions are applied to the predictions from the NN and actual value to calculate how wrong the NN is."}
       ]
     },
     {
@@ -61,7 +62,8 @@ const MY_TOOLBOX = {
         { kind: "block", type: "SGD" },
         { kind: "block", type: "ADAM" },
         { kind: "block", type: "RMSPROP" },
-        { kind: "block", type: "ADAGRAD" }
+        { kind: "block", type: "ADAGRAD" },
+        { kind: "label", text: "Optimizers help the NN 'learn' how to achieve the actual output values."}
       ]
     }
   ]
