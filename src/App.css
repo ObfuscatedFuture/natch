@@ -54,12 +54,13 @@
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 9999;
-    min-width: 300px;
-    width: 50%;
-    max-height: 65%;
-    overflow:scroll;
-    
-
+  
+    /* 👇 Size tweaks */
+    min-width: 400px;
+    width: 80%;           /* was 50% */
+    max-height: 85%;      /* was 65% */
+    height: 85%;          /* optional: to force height */
+    overflow: scroll;
   }
   
   .CloseButton {

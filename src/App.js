@@ -156,39 +156,70 @@ const blocklyWorkspace = useRef(null);    // for Blockly workspace
     setCode(generatedCode);
   }
 
+  const BinderNotebook = () => {
+    return (
+        <iframe
+        src="https://jupyterlite.github.io/demo/lab/index.html"
+        width="100%"
+        height="600"
+        style={{ border: "none" }}
+        title="JupyterLite"
+      ></iframe>
+    );
+  };
+
   return (
     <div className="screen">
-      <div className="sidebar">Sidebar Here
-      <button onClick={generateCode}>
+      <div className="sidebar">
+        Sidebar Here
+        <button onClick={generateCode}>
           Generate Code
         </button>
         <button onClick={toggleWorkspace}>
           {showWorkspace ? "Show Visualization" : "Show Workspace"}
         </button>
       </div>
-
+  
       <div className="main-area">
-        
         <div
           ref={blocklyDiv}
           className="blockly-workspace"
           style={{ display: showWorkspace ? "block" : "none" }}
-          
         />
-        <NeuralNetworkVisualizer layers={[4,2,3,4,5]}></NeuralNetworkVisualizer>
-
+        <NeuralNetworkVisualizer layers={[4, 2, 3, 4, 5]} />
       </div>
+  
       {visible && (
         <div className="CenteredBox">
           <button className="CloseButton" onClick={handleClose}>×</button>
-          <SyntaxHighlighter language="python" style={oneDark} customStyle={{ height: '100%', overflow: 'auto' }}>
+          <SyntaxHighlighter
+            language="python"
+            style={oneDark}
+            customStyle={{ height: '100%', overflow: 'auto' }}
+          >
             {code}
           </SyntaxHighlighter>
+  
+          {/* JupyterLite Embed Below the Code */}
+          <div style={{ width: "100%", height: "100%" }}>
+  <iframe
+    src="https://jupyterlite.github.io/demo/lab/index.html"
+    width="100%"
+    height="100%"
+    frameBorder="0"
+    allow="clipboard-write"
+    title="JupyterLite"
+    style={{
+      display: "block",
+      border: "none",
+      width: "100%",
+      height: "100%",
+    }}
+  ></iframe>
+</div>
         </div>
-
       )}
     </div>
-  );
-}
+  );}
 
 export default App;
