@@ -1,6 +1,7 @@
 import * as Blockly from 'blockly/core';
 import { javascriptGenerator, Order } from "blockly/javascript";
 
+const color = 260
 Blockly.Blocks['layer'] = {
     init: function () {
       this.appendDummyInput()
@@ -26,49 +27,46 @@ Blockly.Blocks['layer'] = {
   }
 };
 
-Blockly.Blocks['network'] = {
-  init: function () {
-    this.appendDummyInput()
-        .appendField("Network");
+  Blockly.Blocks['network'] = {
+    init: function () {
+      this.appendDummyInput()
+          .appendField("Network");
+  
+      this.appendStatementInput("LAYERS") // ✅ accept multiple layer blocks
+          .setCheck("Layer")               // optionally restrict to "Layer" type
+          .appendField("Layers");
+  
+      this.appendValueInput("LOSS")
+          .setCheck("LossFunc")
+          .appendField("Loss Func:");
 
-    this.appendStatementInput("LAYERS") 
-        .setCheck("Layer")               
-        .appendField("Layers");
-
-    this.appendValueInput("LOSS")
-        .setCheck("LossFunc")
-        .appendField("Loss Func:");
-
-      this.appendValueInput("OPTIMIZER")
+          this.appendValueInput("OPTIMIZER")
           .setCheck("Optimizer")
           .appendField("Optimizer:");
 
-    this.appendDummyInput()
-        .appendField("Number of Output Nodes:");
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldTextInput("#"), "outputSize");
-
-    this.setInputsInline(false);
-    this.setPreviousStatement(null, null);
-    this.setNextStatement(null, null);
-    this.setColour("#009fb7");
-    this.setTooltip("Define a network with stacked layers and a loss function");
-    this.setHelpUrl("");
-    
-  }
-};
-
-const color = "#fe4a49";
-
-Blockly.Blocks['SGD'] = {
-  init: function () {
       this.appendDummyInput()
-          .appendField("SGD");
-      this.setOutput(true, "Optimizer");
-      this.setColour(color);
-      this.setTooltip("Randomly selects subset of data to calculate the optimal values to never get stuck at an unoptimal point.");
-      this.setHelpUrl("https://towardsdatascience.com/neural-network-optimizers-made-simple-core-algorithms-and-why-they-are-needed-7fd072cd2788/");
-  }
+          .appendField("Number of Output Nodes:");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldTextInput("#"), "outputSize");
+  
+      this.setInputsInline(false);
+      this.setPreviousStatement(null, null);
+      this.setNextStatement(null, null);
+      this.setColour(207);
+      this.setTooltip("Define a network with stacked layers and a loss function");
+      this.setHelpUrl("");
+      
+    }
+  };
+  Blockly.Blocks['SGD'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("SGD");
+        this.setOutput(true, "Optimizer");
+        this.setColour(260);
+        this.setTooltip("Randomly selects subset of data to calculate the optimal values to never get stuck at an unoptimal point.");
+        this.setHelpUrl("https://towardsdatascience.com/neural-network-optimizers-made-simple-core-algorithms-and-why-they-are-needed-7fd072cd2788/");
+    }
 };
 Blockly.Blocks['ADAM'] = {
   init: function () {
@@ -118,9 +116,9 @@ Blockly.Blocks['MEAN_SQUARED_ERROR'] = {
         this.appendDummyInput()
             .appendField("Mean Squared Error");
         this.setOutput(true, "LossFunc"); 
-        this.setColour(color);
-        this.setTooltip("Computes the average of squared differences between actual and predicted values. Easiest to use and understand.");
-        this.setHelpUrl("https://neptune.ai/blog/pytorch-loss-functions#Mean-Squared-Error");
+        this.setColour(260);
+        this.setTooltip("Mean Squared Error TOOL TIP");
+        this.setHelpUrl("");
     }
 };
 javascriptGenerator.forBlock['MEAN_SQUARED_ERROR'] = function () {
@@ -131,9 +129,9 @@ Blockly.Blocks['L1_LOSS'] = {
         this.appendDummyInput()
             .appendField("L1_Loss");
         this.setOutput(true, "LossFunc"); 
-        this.setColour(color);
-        this.setTooltip("Computes average of sum of absolute differences between actual and predicted values. Useful for regression since it is robust to outliers.");
-        this.setHelpUrl("https://neptune.ai/blog/pytorch-loss-functions#Mean-Absolute-Error");
+        this.setColour(260);
+        this.setTooltip("L1_Loss TOOL TIP");
+        this.setHelpUrl("");
     }
 };
 
@@ -151,9 +149,9 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("RELU");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(color);
-      this.setTooltip("Most commonly used activation function. Simple and fast, but outputs 0 for negatives.");
-      this.setHelpUrl("https://medium.com/@bhavaninetha222/activation-functions-explained-types-uses-and-importance-in-deep-learning-84eb8584a895");
+      this.setColour(260);
+      this.setTooltip("RELU TOOL TIP");
+      this.setHelpUrl("");
     }
   };
 
@@ -162,9 +160,9 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("SIGMOID");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(color);
-      this.setTooltip("S-shaped, smooth curve ranging from 0 to 1. Commonly used in binary classification.");
-      this.setHelpUrl("https://medium.com/@bhavaninetha222/activation-functions-explained-types-uses-and-importance-in-deep-learning-84eb8584a895");
+      this.setColour(260);
+      this.setTooltip("SIGMOID TOOL TIP");
+      this.setHelpUrl("");
     }
   };
 
@@ -173,9 +171,9 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("TANH");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(color);
-      this.setTooltip("Same as Sigmoid, except centered at 0 from -1 to 1 and easier to take the gradient of. Still suffers from vanishing gradients");
-      this.setHelpUrl("https://medium.com/@bhavaninetha222/activation-functions-explained-types-uses-and-importance-in-deep-learning-84eb8584a895");
+      this.setColour(260);
+      this.setTooltip("TANH TOOL TIP");
+      this.setHelpUrl("");
     }
   };
 
@@ -184,9 +182,9 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("SOFTMAX");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(color);
-      this.setTooltip("Used in output layer for multi-classification problems. ");
-      this.setHelpUrl("https://medium.com/@bhavaninetha222/activation-functions-explained-types-uses-and-importance-in-deep-learning-84eb8584a895");
+      this.setColour(260);
+      this.setTooltip("SOFTMAX TOOL TIP");
+      this.setHelpUrl("");
     }
   };
 
@@ -195,9 +193,9 @@ Blockly.Blocks['RELU'] = {
       this.appendDummyInput()
           .appendField("GELU");
       this.setOutput(true, "ActivationFunc"); 
-      this.setColour(color);
-      this.setTooltip("Similar to ReLu. Offers a range of negative values for small negative values.");
-      this.setHelpUrl("https://medium.com/@shauryagoel/gelu-gaussian-error-linear-unit-4ec59fb2e47c");
+      this.setColour(260);
+      this.setTooltip("Gelu is better than ReLu");
+      this.setHelpUrl("");
     }
   };
 
