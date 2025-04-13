@@ -24,6 +24,38 @@
 .tab-bar button:hover {
     background-color: #555;
 }
+.copy-button {
+  position: absolute;
+  top: 10%;
+  height: 10%;
+  right: 0.5rem;
+  padding: 0.4rem;
+  background-color: #1f1f1f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+}
+.copy-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius:0.2rem;
+}
+.useless-div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: 3rem;
+  overflow: hidden;
+}
+
 
 /* Main area takes the remaining width */
 .main-area {
@@ -45,10 +77,10 @@
   position: fixed;
 }
 .side-content {
-  position: fixed;
+  position: relative;
   top: 9%;        /* Starts right after the .tabs (which is 10% high) */
   right: 0;
-  width: 40%;
+  width: 100%;
   height: 90%;      /* Remaining height */
   background-color: #fafafa;
   z-index: 998;     /* Slightly lower than .tabs */

@@ -10,6 +10,7 @@ import { Layer, ActivationFunction, Optimizer, NeuralNetwork, LossFunction } fro
 import Code from "./Processing";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Copy } from 'lucide-react'
 
 
 const MY_TOOLBOX = {
@@ -198,6 +199,12 @@ function App() {
           <div className = "side-content">
           {visible && (
           <>
+          <div className ="useless-div">
+          <button className="copy-button">
+            <Copy />
+            </button>
+          </div>
+            
             <SyntaxHighlighter language="python" style={oneDark} customStyle={{ height: '100%', overflow: 'auto' }}>
               {code}
             </SyntaxHighlighter>
