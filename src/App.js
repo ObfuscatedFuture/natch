@@ -197,7 +197,6 @@ function App() {
           <div className = "side-content">
           {visible && (
           <>
-            <button className="CloseButton" onClick={handleClose}>×</button>
             <SyntaxHighlighter language="python" style={oneDark} customStyle={{ height: '100%', overflow: 'auto' }}>
               {code}
             </SyntaxHighlighter>
@@ -205,8 +204,7 @@ function App() {
           )}
           {neuralNetwork != null ? <NeuralNetworkVisualizer nnObj={neuralNetwork}></NeuralNetworkVisualizer> :null}
 
-          </div>
-         <div className="tabs">
+          <div className="tabs">
             <button onClick={generateCode}>
                 Generate Code
               </button>
@@ -214,6 +212,8 @@ function App() {
                 Show Visualization
               </button>
           </div>
+          </div>
+         
         </div>
       
         <div
