@@ -26,7 +26,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Activation Funcs",
-      colour: "#CCE2E9",
+      colour: "#410880",
       contents: [
         { kind: "block", type: "RELU" },
         { kind: "block", type: "SIGMOID" },
@@ -56,7 +56,7 @@ const MY_TOOLBOX = {
     {
       kind: "category",
       name: "Optimizers",
-      colour: "#f2a900",
+      colour: "#2C8F05",
       contents: [
         { kind: "block", type: "SGD" },
         { kind: "block", type: "ADAM" },
