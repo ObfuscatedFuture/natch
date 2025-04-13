@@ -88,7 +88,16 @@ function App() {
     setVisible(prev => !prev);
   };
 
-
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code)
+      .then(() => {
+        console.log('Copied to clipboard');
+      })
+      .catch((err) => {
+        console.error('Failed to copy: ', err);
+      });
+  };
+  
   useEffect(() => {
     if (!blocklyDiv.current) return;
   
@@ -200,7 +209,7 @@ function App() {
           {visible && (
           <>
           <div className ="useless-div">
-          <button className="copy-button">
+          <button onClick={handleCopy} className="copy-button">
             <Copy />
             </button>
           </div>
