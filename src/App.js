@@ -28,11 +28,11 @@ const MY_TOOLBOX = {
       name: "Activation Funcs",
       colour: "#CCE2E9",
       contents: [
+        { kind: "label", text: "Activation functions are applied to the output of a neuron in the network to represent non-linear relationships."},
         { kind: "block", type: "RELU" },
         { kind: "block", type: "SIGMOID" },
         { kind: "block", type: "TANH" },
-        { kind: "block", type: "SOFTMAX" },
-        { kind: "label", text: "Activation functions are applied to the output of a neuron in the network to represent complex non-linear relationships."}
+        { kind: "block", type: "SOFTMAX" }
       ]
     },
     {
@@ -48,10 +48,10 @@ const MY_TOOLBOX = {
       name: "Loss Functions",
       colour: "#CCE2E9",
       contents: [
+        { kind: "label", text: "Loss functions are applied to the predictions from the NN and actual value to calculate how wrong the NN is."},
         { kind: "block", type: "CROSS_ENTROPY" },
         { kind: "block", type: "MEAN_SQUARED_ERROR" },
-        { kind: "block", type: "L1_LOSS" },
-        { kind: "label", text: "Loss functions are applied to the predictions from the NN and actual value to calculate how wrong the NN is."}
+        { kind: "block", type: "L1_LOSS" }
       ]
     },
     {
@@ -59,11 +59,11 @@ const MY_TOOLBOX = {
       name: "Optimizers",
       colour: "#f2a900",
       contents: [
+        { kind: "label", text: "Optimizers help the NN 'learn' how to achieve the actual output values."},
         { kind: "block", type: "SGD" },
         { kind: "block", type: "ADAM" },
         { kind: "block", type: "RMSPROP" },
-        { kind: "block", type: "ADAGRAD" },
-        { kind: "label", text: "Optimizers help the NN 'learn' how to achieve the actual output values."}
+        { kind: "block", type: "ADAGRAD" }
       ]
     }
   ]
