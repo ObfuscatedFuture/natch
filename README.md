@@ -1,58 +1,57 @@
-This project was  completed for Bitcamp 2025
+
+# Natch: Visual Neural Network Builder
+
+Created for Bitcamp 2025
+
+# Overview
+Natch is a block-based interface for building and understanding neural networks. Inspired by Scratch, it lets users drag and drop blocks to define layers, parameters, and functions, then generates clean PyTorch code and a visual representation of the model.
+
+Our goal was to make deep learning more approachable for beginners by focusing on how networks work, not just how to write the code.
+
 ## Inspiration
+We were inspired by how Scratch makes programming visual and intuitive. Machine learning can feel abstract, so we wanted to build something that makes it easier to see what’s happening inside a neural network.
+We were also influenced by tools that visualize data packets and other low-level processes. Visualizations in computer science are rare, and we wanted to explore how they can help people understand key concepts faster.
 
-We were inspired by how Scratch lowers the barrier for coders and with machine learning at the cutting-edge of computer science, wanted to do the same for neural networks. We were also inspired by a project that visualizes network packet. Computer science concepts are typically more important than the syntax of coding, but visualizations in computer science are rare. 
+## Features
+- Drag and drop blocks to build a neural network
+- Tooltips that explain every function and parameter
+- Choose input and output nodes
+- Add any number of hidden layers
+- Each layer can have its own activation function
+- Configure optimizers and loss functions
+- Error handling for missing or invalid parameters
+- Generates concise, runnable PyTorch code
+- Visualizes the network as a connected graph
+- Built-in clipboard with copy, paste, undo, redo, and delete
+- Copy generated Python code to your clipboard
 
-## What it does
+Tech Stack
+- React, JavaScript, CSS
+- Blockly (the same engine behind Scratch and Code.org)
+- react-syntax-highlighter for displaying Python code
 
-Natch lets you drag and drop blocks to add parameters to a neural network, then provides code and runs your neural network. 
+## Development Process
+We used Blockly to handle the block logic and React to manage the interface. Most of our time went into getting these two systems to communicate smoothly. We designed the UI around how someone would think through a network, not how they would code it, and focused on making each action immediately visible.
 
-Below is a list of all of the features:
-* Drag and drop: Drag blocks and see what parameters you must add before generating your code and your visualization
-* Tooltips: See an explanation of every single function to guide you in your creation of the neural network
-* Choose number of input and output nodes
-* Add any number of hidden layers
-* Each layer has an activation function
-* The entire network has an **optimizer** and a **loss function**
-* Error handling: you will receive an alert if you have not provided all parameters, in the right format
-* Code generation: Generates concise PyTorch code
-* Visualization: View the graph of the neural network to build your intuition for deep learning
-* In-workspace clipboard: Use keyboard shortcuts and right click menu to copy, paste, undo, redo, and cut
-* Move blocks to the trash when you're done using them or if you made a mistake
-* Copy your generated Python code to your clipboard
+## Challenges
+The react-blockly library was poorly documented and introduced a lot of unexpected issues, so we wrote our own integration between React and Blockly.
+We also tried embedding a lightweight Jupyter notebook instance for running code, but only public notebooks were supported, so we switched to exporting code that can be run locally.
+At one point, we ran into a strange React error that appeared on all but one computer, which slowed down our testing.
 
-## How we built it
+## Results
+We built a working prototype in about 16 hours over two days. It’s a fully functional block-coding tool with a clean interface, real-time error handling, and visualization. The final project was around 835 lines of code.
 
-We used Blockly, the same engine that runs code.org, MIT's Scratch, and AppInventor, to build a modern interface for block coding. We carefully planned a UI that simplifies the process of building a deep learning model. We also incorporated a syntax highlighting library called `react-syntax-highlighter` in the generated Python code.  
+## What I Learned
+I learned a lot about Blockly and React, especially how to handle complex UI state and component updates. I also improved our understanding of how to teach and visualize machine learning concepts.
 
-## Challenges we ran into
+Next Steps
+- Add support for CNNs and NLP models
+- Include templates and example networks for learning
+- Allow more customization for optimizers and parameters
+- Show activation functions directly in the visualization
 
-React and Blockly have a react-blocky nom package that is supposed to use Blockly in a more React style. It turns out the `react-blockly` library was poorly documented and it ended up causing more problems than solutions. We ended up abandoning the react-blockly. 
-
-We tried embedding a lite Jupyter notebook instance, but we are only allowed to use a public notebook, not a private instance for each user. We decided to scrap the idea and prompt the user to run their code separately in a notebook. 
-
-We received a strange react error that showed up on all but one computer. 
-
-## Accomplishments that we're proud of
-
-We built a block coding tool with a beautiful interface and an original idea in only about 16 hours over 2 days!
-
-~835 lines of code
-
-## What we learned
-
-We learned about Blockly and the power of prompt engineering. Some of us were using React and JavaScript for the first time. 
-
-## What's next for Team Natch
-
-* Other kinds of networks: CNNs, NLPs
-* courses and templates. Natch is an educational tool at its core. 
-* adding parameters to optimizers
-* display the activation function as a symbol in our visualization
-## Authors
-
-- [@ObfuscatedFuture](https://www.github.com/obfuscatedfuture)
-- [@VarunSingh87](https://github.com/varunsingh87)
-- [@kevinli3633](https://github.com/kevinli3633)
-- [@m-jhin](https://github.com/m-jhin)
-
+Team
+- @ObfuscatedFuture
+- @VarunSingh87
+- @kevinli3633
+- @m-jhin
