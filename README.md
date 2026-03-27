@@ -3,6 +3,8 @@
 
 Created for Bitcamp 2025
 
+[[Video Overview]](https://www.instagram.com/reel/DVdrfc3FKTb/?igsh=MWF3Zjh1dXk4czRlcg%3D%3D)
+
 # Overview
 Natch is a block-based interface for building and understanding neural networks. Inspired by Scratch, it lets users drag and drop blocks to define layers, parameters, and functions, then generates clean PyTorch code and a visual representation of the model.
 
